@@ -34,4 +34,15 @@ describe("Square", () => {
     assert.strictEqual(result, 1);
   })
 
+  it("should return null for letter of an empty square", () => {
+    const result = square.getLetter();
+    assert.strictEqual(result, null);
+  });
+
+  it("should return the tile letter of a populated square", () => {
+    square.tile = tile;
+    const result = square.getLetter();
+    assert.strictEqual(result, `A`);
+  })
+
 });
