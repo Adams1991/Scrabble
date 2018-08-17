@@ -27,7 +27,28 @@ class Board {
   getSquareValueByCoord(x, y) {
     const square = this.getSquareByCoord(x, y);
     return square.getTileValue();
-  }
+  };
+
+  getAdjacentTiles(x, y) {
+    const adjacentTiles = [];
+    if (this.getTileByCoord(x-1, y)) {
+      adjacentTiles.push(this.getTileByCoord(x-1, y));
+    };
+    if (this.getTileByCoord(x, y+1)) {
+      adjacentTiles.push(this.getTileByCoord(x, y+1));
+    };
+    if (this.getTileByCoord(x+1, y)) {
+      adjacentTiles.push(this.getTileByCoord(x+1, y));
+    };
+    if (this.getTileByCoord(x, y-1)) {
+      adjacentTiles.push(this.getTileByCoord(x, y-1));
+    };
+
+    if(!adjacentTiles.length){
+      return null;
+    }
+    return adjacentTiles;
+  };
 
 }
 

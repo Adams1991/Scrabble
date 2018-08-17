@@ -47,4 +47,9 @@ describe("Board", () => {
     assert.strictEqual(result2, 0);
   });
 
+  it("should return null if there are no tiles in squares adjacent to a given square", () => {
+    const result = board.getAdjacentTiles(3, 5);
+    assert.deepStrictEqual(result, null);
+  })
+
 });
