@@ -53,4 +53,11 @@ describe("Player", () => {
     assert.deepStrictEqual(player.getTileInRackByIndex(1), tile3);
   });
 
+  it("should be able to add points to score", () => {
+    player.addToScore(16);
+    assert.deepStrictEqual(player.score, 16);
+    player.addToScore(22);
+    assert.deepStrictEqual(player.score, 38);
+  });
+
 });

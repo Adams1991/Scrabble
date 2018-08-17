@@ -27,6 +27,10 @@ class Player {
     this.rack.removeTileByIndex();
   };
 
+  addToScore(points) {
+    this.score += points;
+  };
+
 };
 
 module.exports = Player;
