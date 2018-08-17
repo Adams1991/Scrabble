@@ -20,6 +20,12 @@ MongoClient.connect('mongodb://localhost:27017')
     console.error(err);
   });
 
+// Leaving for later in case needed for start new game screen
+// app.get('/new-game', (req, res) => {
+//   res.sendFile('show.html');
+//
+// });
+
 app.listen(3000, function() {
   console.log(`ToDo List server running on port ${this.address().port}`);
 });
