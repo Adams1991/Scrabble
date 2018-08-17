@@ -6,10 +6,12 @@ describe("Rack", () => {
 
   let rack;
   let tile;
+  let tilesFromBag;
 
   beforeEach(() => {
     tile = new Tile(`A`, 1);
     rack = new Rack();
+    tilesFromBag = [];
   })
 
   it("should start without any tiles", () => {
@@ -23,6 +25,14 @@ describe("Rack", () => {
     assert.deepStrictEqual(result, 1);
   });
 
+  it("should be able to add tiles", () => {
+    tilesFromBag.push(tile);
+    tilesFromBag.push(tile);
+    rack.addTiles(tilesFromBag)
+    const result = rack.tiles.length;
+    assert.deepStrictEqual(result, 2);
+  });
+
   it("should be able to get tile by index", () => {
     rack.addTile(tile);
     const result = rack.getTileByIndex(0);
@@ -30,8 +40,11 @@ describe("Rack", () => {
   })
 
 
-
-
-
+  it("should be able to remove tile by index", () => {
+    rack.addTile(tile);
+    rack.removeTileByIndex(0);
+    const result = rack.tiles.length;
+    assert.deepStrictEqual(result, 0);
+  })
 
 });

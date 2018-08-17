@@ -2,31 +2,7 @@ const Tile = require("./tile.js");
 
 class Bag {
   constructor() {
-  this.tiles = [];
-  };
-
-  addTile(tile) {
-    this.tiles.push(tile);
-  };
-
-  addTiles(tiles) {
-    tiles.forEach ((tile) => {
-      this.addTile(tile);
-    });
-  };
-
-  addNewTile(letter, value) {
-    const newTile = new Tile(letter, value);
-    this.addTile(newTile);
-  };
-
-  addNewTiles(letter, value, quantity) {
-    for (let i=1; i<=quantity; i++) {
-      this.addNewTile(letter, value)
-    };
-  };
-
-  fill() {
+    this.tiles = [];
     this.addNewTiles('A', 1, 9);
     this.addNewTiles('B', 3, 2);
     this.addNewTiles('C', 3, 2);
@@ -54,6 +30,27 @@ class Bag {
     this.addNewTiles('Y', 4, 2);
     this.addNewTiles('Z', 10, 1);
     this.addNewTiles('', 0, 2);
+  };
+
+  addTile(tile) {
+    this.tiles.push(tile);
+  };
+
+  addTiles(tiles) {
+    tiles.forEach ((tile) => {
+      this.addTile(tile);
+    });
+  };
+
+  addNewTile(letter, value) {
+    const newTile = new Tile(letter, value);
+    this.addTile(newTile);
+  };
+
+  addNewTiles(letter, value, quantity) {
+    for (let i=1; i<=quantity; i++) {
+      this.addNewTile(letter, value)
+    };
   };
 
   removeRandomTile() {
