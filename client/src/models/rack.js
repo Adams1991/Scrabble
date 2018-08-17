@@ -11,6 +11,10 @@ class Rack {
     return this.tiles[index]
   }
 
+  removeTileByIndex(index){
+    this.tiles.splice(index, 1);
+  }
+
 
 };
 
