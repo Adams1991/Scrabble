@@ -6,6 +6,11 @@ class Player {
     this.rack = new Rack();
     this.score = 0;
   };
+
+  getTile(tile) {
+    this.rack.addTile(tile);
+  };
+
 };
 
 module.exports = Player;
