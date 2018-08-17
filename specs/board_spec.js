@@ -50,6 +50,12 @@ describe("Board", () => {
   it("should return null if there are no tiles in squares adjacent to a given square", () => {
     const result = board.getAdjacentTiles(3, 5);
     assert.deepStrictEqual(result, null);
-  })
+  });
+
+  it("should return array of adjacent tiles for a given square if tiles are adjacent", () => {
+    board.addTileByCoord(tile, 3, 5);
+    const result = board.getAdjacentTiles(4, 5);
+    assert.deepStrictEqual(result, [tile]);
+  });
 
 });
