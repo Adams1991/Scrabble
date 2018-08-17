@@ -15,4 +15,8 @@ describe("Player", () => {
     assert.deepStrictEqual(player.name, "Wellington");
   });
 
+  it("should start with empty rack", () => {
+    assert.deepStrictEqual(player.rack.tiles.length, 0);
+  });
+
 });
