@@ -1,6 +1,7 @@
 const assert = require('assert');
 const Player = require('../client/src/models/player.js');
 const Tile = require('../client/src/models/tile.js');
+const Bag = require('../client/src/models/bag.js');
 
 describe("Player", () => {
 
@@ -8,13 +9,14 @@ describe("Player", () => {
   let tile1;
   let tile2;
   let tile3;
-
+  let bag;
 
   beforeEach(() => {
     player = new Player("Wellington");
     tile1 = new Tile("A", 1);
     tile2 = new Tile("B", 3);
     tile3 = new Tile("D", 2);
+    bag = new Bag();
   });
 
   it("should have a name", () => {
@@ -23,6 +25,7 @@ describe("Player", () => {
 
   it("should start with empty rack", () => {
     assert.deepStrictEqual(player.rack.tiles.length, 0);
+    assert.deepStrictEqual(player.getNumberOfTilesInRack(), 0)
   });
 
   it("should start with no score", () => {
@@ -64,6 +67,12 @@ describe("Player", () => {
     player.addToScore(324);
     player.subtractFromScore(3);
     assert.deepStrictEqual(player.score, 321);
+  });
+
+  it("should be able to get tiles from bag", () => {
+    player.getTilesFromBag(7, bag);
+    assert.deepStrictEqual(player.getNumberOfTilesInRack(), 7);
+    assert.deepStrictEqual(bag.tiles.length, 93);
   });
 
 });

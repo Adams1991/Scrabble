@@ -1,4 +1,5 @@
 const Rack = require("./rack.js");
+const Bag = require("./bag.js");
 
 class Player {
   constructor(name) {
@@ -34,6 +35,17 @@ class Player {
   subtractFromScore(points) {
     this.score -= points;
   };
+
+  getTilesFromBag(quantity, bag) {
+    const tiles = bag.removeRandomTiles(quantity);
+    this.addTilesToRack(tiles);
+  };
+
+  // swapTiles(tiles, bag) {
+  //   this.removeTilesFromRack(tiles);
+  //   this.getTilesFromBag(tiles.length, bag);
+  //   bag.addTiles(tiles);
+  // };
 
 };
 
