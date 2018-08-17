@@ -7,8 +7,16 @@ class Player {
     this.score = 0;
   };
 
-  getTile(tile) {
+  getNumberOfTilesInRack() {
+    return this.rack.tiles.length;
+  };
+
+  addTileToRack(tile) {
     this.rack.addTile(tile);
+  };
+
+  addTilesToRack(tiles) {
+    this.rack.addTiles(tiles);
   };
 
 };

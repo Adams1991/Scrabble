@@ -30,9 +30,16 @@ describe("Player", () => {
   });
 
   it("should be able to receive tile", () => {
-    player.getTile(tile1);
-    assert.deepStrictEqual(player.rack.tiles.length, 1);
+    player.addTileToRack(tile1);
+    assert.deepStrictEqual(player.getNumberOfTilesInRack(), 1);
     assert.deepStrictEqual(player.rack.tiles[0].letter, "A");
+  });
+
+  it("should be able to receive tiles", () => {
+    player.addTilesToRack([tile2, tile3]);
+    assert.deepStrictEqual(player.getNumberOfTilesInRack(), 2);
+    assert.deepStrictEqual(player.rack.tiles[0].letter, "B");
+    assert.deepStrictEqual(player.rack.tiles[1].value, 2);
   });
 
 });
