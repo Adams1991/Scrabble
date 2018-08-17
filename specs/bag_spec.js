@@ -63,4 +63,24 @@ describe("Bag", () => {
     assert.deepStrictEqual(bag.tiles[50].letter, "L");
   });
 
+  it("can return random tiles", () => {
+    bag.fill();
+    const result = bag.getRandomTiles(7);
+    assert.deepStrictEqual(result.length, 7);
+    assert.deepStrictEqual(bag.tiles.length, 100);
+  });
+
+  it("can remove random tile", () => {
+    bag.fill();
+    const tile = bag.removeRandomTile()[0];
+    assert.deepStrictEqual(bag.tiles.length, 99);
+  });
+
+  it("can remove random tiles", () => {
+    bag.fill();
+    const tiles = bag.removeRandomTiles(7);
+    assert.deepStrictEqual(bag.tiles.length, 93);
+    assert.deepStrictEqual(tiles.length, 7);
+  });
+
 });
