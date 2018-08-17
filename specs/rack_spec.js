@@ -17,6 +17,12 @@ describe("Rack", () => {
     assert.deepStrictEqual(result, []);
   });
 
+  it("should be able to add a tile", () => {
+    rack.addTile(tile);
+    const result = rack.tiles.length;
+    assert.deepStrictEqual(result, 1);
+  });
+
 
 
 
