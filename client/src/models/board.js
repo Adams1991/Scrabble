@@ -3,7 +3,13 @@ const Square = require('./square.js');
 class Board {
   constructor() {
     this.squares = createSquares();
-  }
+  };
+
+  getTileByCoord(x, y) {
+    const square = this.squares[y][x];
+    return square.tile;
+  };
+
 }
 
 module.exports = Board;

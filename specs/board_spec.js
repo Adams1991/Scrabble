@@ -21,4 +21,9 @@ describe("Board", () => {
     assert.strictEqual(result2, 15);
   })
 
+  it("should return null for given coordinates when asked to return a tile", () => {
+    const result = board.getTileByCoord(3, 5);
+    assert.strictEqual(result, null);
+  })
+
 });
