@@ -27,4 +27,12 @@ describe("Bag", () => {
     assert.deepStrictEqual(result, [tile1]);
   });
 
+  it("should be able to receive tiles", () => {
+    bag.addTile(tile1);
+    bag.addTiles([tile2, tile3]);
+    const result = bag.tiles;
+    assert.deepStrictEqual(result, [tile1, tile2, tile3]);
+  });
+
+
 });
