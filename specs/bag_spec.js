@@ -56,4 +56,11 @@ describe("Bag", () => {
     assert.deepStrictEqual(result, tiles);
   });
 
+  it("can be filled", () => {
+    bag.fill();
+    assert.deepStrictEqual(bag.tiles.length, 100);
+    assert.deepStrictEqual(bag.tiles[98].value, 0);
+    assert.deepStrictEqual(bag.tiles[50].letter, "L");
+  });
+
 });
