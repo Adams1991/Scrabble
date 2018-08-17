@@ -42,4 +42,9 @@ describe("Player", () => {
     assert.deepStrictEqual(player.rack.tiles[1].value, 2);
   });
 
+  it("should be able to get tile in rack by index", () => {
+    player.addTilesToRack([tile1, tile2, tile3]);
+    assert.deepStrictEqual(player.getTileInRackByIndex(1), tile2);
+  });
+
 });

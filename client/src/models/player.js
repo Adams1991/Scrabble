@@ -19,6 +19,10 @@ class Player {
     this.rack.addTiles(tiles);
   };
 
+  getTileInRackByIndex(index) {
+    return this.rack.getTileByIndex(index);
+  };
+
 };
 
 module.exports = Player;
