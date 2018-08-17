@@ -47,4 +47,10 @@ describe("Player", () => {
     assert.deepStrictEqual(player.getTileInRackByIndex(1), tile2);
   });
 
+  it("should be able to remove tile from rack by index", () => {
+    player.addTilesToRack([tile1, tile2, tile3]);
+    player.removeTileFromRackByIndex(1);
+    assert.deepStrictEqual(player.getTileInRackByIndex(1), tile3);
+  });
+
 });

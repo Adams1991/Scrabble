@@ -23,6 +23,10 @@ class Player {
     return this.rack.getTileByIndex(index);
   };
 
+  removeTileFromRackByIndex(index) {
+    this.rack.removeTileByIndex();
+  };
+
 };
 
 module.exports = Player;
