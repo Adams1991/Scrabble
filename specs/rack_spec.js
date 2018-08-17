@@ -29,9 +29,11 @@ describe("Rack", () => {
     assert.deepStrictEqual(result, tile);
   })
 
-
-
-
-
+  it("should be able to remove tile by index", () => {
+    rack.addTile(tile);
+    rack.removeTileByIndex(0);
+    const result = rack.tiles.length;
+    assert.deepStrictEqual(result, 0);
+  })
 
 });
