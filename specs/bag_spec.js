@@ -34,5 +34,15 @@ describe("Bag", () => {
     assert.deepStrictEqual(result, [tile1, tile2, tile3]);
   });
 
+  it("should be able to receive new tile", () => {
+    bag.addNewTile("E", 1);
+    const result = bag.tiles;
+    const tile = new Tile("E", 1);
+    assert.deepStrictEqual(bag.tiles.length, 1);
+    assert.deepStrictEqual(bag.tiles[0].value, 1);
+    assert.deepStrictEqual(bag.tiles[0].letter, "E");
+    assert.deepStrictEqual(result, [tile]);
+  });
+
 
 });

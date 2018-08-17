@@ -1,3 +1,5 @@
+const Tile = require("./tile.js");
+
 class Bag {
   constructor() {
   this.tiles = [];
