@@ -5,9 +5,18 @@ class Board {
     this.squares = createSquares();
   };
 
+  getSquareByCoord(x, y) {
+    return this.squares[y][x];
+  }
+
   getTileByCoord(x, y) {
-    const square = this.squares[y][x];
+    const square = this.getSquareByCoord(x, y);
     return square.tile;
+  };
+
+  addTileByCoord(tile, x, y) {
+    const square = this.getSquareByCoord(x, y);
+    square.tile = tile;
   };
 
 }

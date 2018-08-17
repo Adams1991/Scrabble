@@ -19,11 +19,24 @@ describe("Board", () => {
     const result2 = board.squares[0].length;
     assert.strictEqual(result1, 15);
     assert.strictEqual(result2, 15);
-  })
+  });
 
   it("should return null for given coordinates when asked to return a tile", () => {
     const result = board.getTileByCoord(3, 5);
     assert.strictEqual(result, null);
-  })
+  });
+
+  it("should be able to add a tile by coordinates", () => {
+    board.addTileByCoord(tile, 3, 5);
+    const result = board.getTileByCoord(3, 5);
+    assert.deepStrictEqual(result, tile);
+  });
+
+  it("should be able to remove a tile by coordinates", () => {
+    board.addTileByCoord(tile, 3, 5);
+    board.removeTileByCoord(3, 5);
+    const result = board.getTileByCoord(3, 5);
+    assert.strictEqual(result, null);
+  });
 
 });
