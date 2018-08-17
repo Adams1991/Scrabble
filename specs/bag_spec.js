@@ -44,5 +44,16 @@ describe("Bag", () => {
     assert.deepStrictEqual(result, [tile]);
   });
 
+  it("should be able to receive new tiles", () => {
+    bag.addNewTiles("F", 4, 2);
+    const result = bag.tiles;
+    const tile1 = new Tile("F", 4);
+    const tile2 = new Tile("F", 4);
+    const tiles = [tile1, tile2];
+    assert.deepStrictEqual(bag.tiles.length, 2);
+    assert.deepStrictEqual(bag.tiles[0].value, 4);
+    assert.deepStrictEqual(bag.tiles[1].letter, "F");
+    assert.deepStrictEqual(result, tiles);
+  });
 
 });

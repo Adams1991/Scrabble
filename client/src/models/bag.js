@@ -21,7 +21,7 @@ class Bag {
   };
 
   addNewTiles(letter, value, quantity) {
-    for (i=1; i<=quantity; i++) {
+    for (let i=1; i<=quantity; i++) {
       this.addNewTile(letter, value)
     };
   };
