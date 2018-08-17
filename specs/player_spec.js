@@ -60,4 +60,10 @@ describe("Player", () => {
     assert.deepStrictEqual(player.score, 38);
   });
 
+  it("should be able to subtract points from score", () => {
+    player.addToScore(324);
+    player.subtractFromScore(3);
+    assert.deepStrictEqual(player.score, 321);
+  });
+
 });

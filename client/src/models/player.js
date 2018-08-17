@@ -31,6 +31,10 @@ class Player {
     this.score += points;
   };
 
+  subtractFromScore(points) {
+    this.score -= points;
+  };
+
 };
 
 module.exports = Player;
