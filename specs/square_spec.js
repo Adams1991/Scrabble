@@ -24,7 +24,7 @@ describe("Square", () => {
   });
 
   it("should return null for value of an empty square", () => {
-    const result = square.value;
+    const result = square.getTileValue();
     assert.strictEqual(result, null);
   });
 

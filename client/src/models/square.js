@@ -4,7 +4,10 @@ class Square {
   };
 
   getTileValue() {
-    return this.tile.value;
+    if(this.tile){
+      return this.tile.value;
+    }
+    return null;
   };
 
   getLetter() {
