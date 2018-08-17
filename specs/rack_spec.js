@@ -23,6 +23,12 @@ describe("Rack", () => {
     assert.deepStrictEqual(result, 1);
   });
 
+  it("should be able to get tile by index", () => {
+    rack.addTile(tile);
+    const result = rack.getTileByIndex(0);
+    assert.deepStrictEqual(result, tile);
+  })
+
 
 
 
