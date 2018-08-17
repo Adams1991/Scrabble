@@ -56,22 +56,6 @@ class Bag {
     this.addNewTiles('', 0, 2);
   };
 
-  // getRandomTile() {
-  //   const numberOfTiles = this.tiles.length;
-  //   const randomNumber = Math.floor(numberOfTiles*Math.random());
-  //   return this.tiles[randomNumber];
-  // };
-  //
-  // getRandomTiles(quantity) {
-  //   const tiles = [];
-  //   for (let i=1; i<=quantity; i++) {
-  //     const numberOfTiles = this.tiles.length;
-  //     const randomNumber = Math.floor(numberOfTiles*Math.random());
-  //     tiles.push(this.tiles[randomNumber]);
-  //   };
-  //   return tiles;
-  // };
-
   removeRandomTile() {
     const numberOfTiles = this.tiles.length;
     const randomNumber = Math.floor(numberOfTiles*Math.random());
