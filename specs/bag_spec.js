@@ -21,9 +21,10 @@ describe("Bag", () => {
     assert.strictEqual(result, 0);
   });
 
-  // it("should be able to get value", () => {
-  //   const result = tile.value;
-  //   assert.strictEqual(result, 1);
-  // });
+  it("should be able to receive tile", () => {
+    bag.addTile(tile1);
+    const result = bag.tiles;
+    assert.deepStrictEqual(result, [tile1]);
+  });
 
 });
