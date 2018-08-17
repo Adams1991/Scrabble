@@ -19,6 +19,11 @@ class Board {
     square.tile = tile;
   };
 
+  removeTileByCoord(x, y) {
+    const square = this.getSquareByCoord(x, y);
+    square.tile = null;
+  };
+
 }
 
 module.exports = Board;
@@ -44,7 +49,6 @@ function createSquares() {
     const correctColumnArray = startColumnArray.map(square => square);
     startColumnArray.reverse()
     correctColumnArray.push(mirrorLineArray[i]);
-    console.log(startColumnArray.length);
     const columnArray = correctColumnArray.concat(startColumnArray);
     // console.log(columnArray.length);
 
@@ -65,6 +69,5 @@ function createMirrorLine() {
     const square = new Square();
     mirrorLineArray.push(square);
   }
-  console.log(mirrorLineArray.length);
   return mirrorLineArray;
 }
