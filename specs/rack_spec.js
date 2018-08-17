@@ -25,7 +25,7 @@ describe("Rack", () => {
     assert.deepStrictEqual(result, 1);
   });
 
-  it("should be able to add a tiles", () => {
+  it("should be able to add tiles", () => {
     tilesFromBag.push(tile);
     tilesFromBag.push(tile);
     rack.addTiles(tilesFromBag)
