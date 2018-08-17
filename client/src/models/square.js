@@ -11,7 +11,10 @@ class Square {
   };
 
   getLetter() {
-    return this.tile.letter;
+    if(this.tile){
+      return this.tile.letter;
+    }
+    return null;
   };
 
 };
