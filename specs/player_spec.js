@@ -19,4 +19,8 @@ describe("Player", () => {
     assert.deepStrictEqual(player.rack.tiles.length, 0);
   });
 
+  it("should start with no score", () => {
+    assert.deepStrictEqual(player.score, 0)
+  });
+
 });
