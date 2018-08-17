@@ -28,4 +28,10 @@ describe("Square", () => {
     assert.strictEqual(result, null);
   });
 
+  it("should return the tile value of a populated square", () => {
+    square.tile = tile;
+    const result = square.getTileValue();
+    assert.strictEqual(result, 1);
+  })
+
 });
