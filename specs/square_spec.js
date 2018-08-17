@@ -45,4 +45,11 @@ describe("Square", () => {
     assert.strictEqual(result, `A`);
   })
 
+  it("should be able to remove tile and return the tile", () => {
+    square.tile = tile;
+    const result = square.removeTile();
+    assert.deepStrictEqual(result, tile);
+    assert.strictEqual(square.tile, null);
+  })
+
 });

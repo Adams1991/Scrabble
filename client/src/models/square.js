@@ -17,6 +17,12 @@ class Square {
     return null;
   };
 
+  removeTile() {
+    const tile = this.tile;
+    this.tile = null;
+    return tile;
+  }
+
 };
 
 module.exports = Square;
