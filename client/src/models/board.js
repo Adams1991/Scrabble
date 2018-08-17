@@ -24,6 +24,11 @@ class Board {
     square.tile = null;
   };
 
+  getSquareValueByCoord(x, y) {
+    const square = this.getSquareByCoord(x, y);
+    return square.getTileValue();
+  }
+
 }
 
 module.exports = Board;

@@ -23,9 +23,9 @@ describe("Square", () => {
     assert.deepStrictEqual(result, tile);
   });
 
-  it("should return null for value of an empty square", () => {
+  it("should return 0 for value of an empty square", () => {
     const result = square.getTileValue();
-    assert.strictEqual(result, null);
+    assert.strictEqual(result, 0);
   });
 
   it("should return the tile value of a populated square", () => {

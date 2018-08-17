@@ -7,7 +7,7 @@ class Square {
     if(this.tile){
       return this.tile.value;
     }
-    return null;
+    return 0;
   };
 
   getLetter() {
