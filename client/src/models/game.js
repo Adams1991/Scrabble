@@ -17,7 +17,7 @@ class Game {
   determineLeaders() {
     let leaders = [];
     const scores = this.players.map(player => player.score);
-    const sortedScores = scores.sort((a,b) => a - b);
+    const sortedScores = scores.sort((n1, n2) => n1 - n2);
     const highestScore = sortedScores.pop();
     this.players.forEach((player) => {
       if (player.score === highestScore) {
@@ -29,9 +29,7 @@ class Game {
 
   determineLead() {
     const scores = this.players.map(player => player.score);
-    console.log(scores);
-    const sortedScores = scores.sort((a,b) => a - b);
-    console.log(sortedScores);
+    const sortedScores = scores.sort((n1, n2) => n1 - n2);
     const highestScore = sortedScores.pop();
     const secondHighestScore = sortedScores.pop();
     const lead = highestScore - secondHighestScore;
