@@ -16,3 +16,10 @@ describe("Active Word", () => {
     secondLocatedTile = {tile: tile2, coord: {x:0, y:13}}
     activeWord = new ActiveWord(firstLocatedTile, secondLocatedTile);
   });
+
+  it("should start with calculating direction", () => {
+    const result = activeWord.direction;
+    assert.deepStrictEqual(result, {x:0});
+  });
+
+});
