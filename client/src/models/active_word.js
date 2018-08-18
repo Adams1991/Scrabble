@@ -38,7 +38,7 @@ class ActiveWord {
       const tileScore = placedTile.tile.value;
       return wordScore + tileScore
     }, 0)
-    return completeWordScore; 
+    return completeWordScore;
   }
 
 
@@ -57,10 +57,10 @@ function otherDirection(directionKey) {
 
 
 function calculateDirection(firstCoord, secondCoord){
-  let direction = 0;
+  let direction = null;
   if(firstCoord.x === secondCoord.x){
     direction = { x: firstCoord.x}
-  } else {
+  } else if(firstCoord.y === secondCoord.y){
     direction = { y: firstCoord.y}
   }
   return direction;
