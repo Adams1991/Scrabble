@@ -14,8 +14,19 @@ class Game {
     return this.bag.getNumberOfTiles();
   };
 
+  determineLeaders() {
+    let leaders = [];
+    const scores = this.players.map(player => player.score);
+    const maxScore = Math.max.apply(Math, scores);
+    this.players.forEach((player) => {
+      if (player.score === maxScore) {
+        leaders.push(player);
+      };
+    });
+    return leaders;
+  };
 
-
+  
 
 };
 

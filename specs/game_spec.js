@@ -58,4 +58,14 @@ describe('Game', () => {
     assert.deepStrictEqual(game.board.squares[19], undefined);
   });
 
+  it('should be able to determine leaders', () => {
+    assert.deepStrictEqual(game.determineLeaders(), players);
+    player1.addToScore(23);
+    player2.addToScore(23);
+    assert.deepStrictEqual(game.determineLeaders(), [player1, player2]);
+    player3.addToScore(34);
+    assert.deepStrictEqual(game.determineLeaders(), [player3]);
+  });
+
+
 });
