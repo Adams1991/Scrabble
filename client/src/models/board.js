@@ -5,56 +5,66 @@ class Board {
     this.squares = createSquares();
   };
 
-  getSquareByCoord(x, y) {
+  getSquareByCoord(coordinates) {
+    const x = coordinates.x;
+    const y = coordinates.y;
     return this.squares[y][x];
   }
 
-  getTileByCoord(x, y) {
-    const square = this.getSquareByCoord(x, y);
+  getTileByCoord(coordinates) {
+    const square = this.getSquareByCoord(coordinates);
     return square.tile;
   };
 
-  addTileByCoord(tile, x, y) {
-    const square = this.getSquareByCoord(x, y);
+  addTileByCoord(tile, coordinates) {
+    const square = this.getSquareByCoord(coordinates);
     square.tile = tile;
   };
 
-  removeTileByCoord(x, y) {
-    const square = this.getSquareByCoord(x, y);
+  removeTileByCoord(coordinates) {
+    const square = this.getSquareByCoord(coordinates);
     square.tile = null;
   };
 
-  getSquareValueByCoord(x, y) {
-    const square = this.getSquareByCoord(x, y);
+  getSquareValueByCoord(coordinates) {
+    const square = this.getSquareByCoord(coordinates);
     return square.getTileValue();
   };
 
-  getAdjacentTiles(x, y) {
-    const adjacentTiles = [];
+  getTileBefore(directionKey, coordinates) {
+    return getAdjacentTile(-1, directionKey, coordinates);
+  }
 
-    const left = x-1
-    const up = y-1
-    const right = x+1
-    const down = y+1
+  getTileAfter(directionKey, coordinates) {
+    return getAdjacentTile(1, directionKey, coordinates);
+  }
 
-    if (left >= 0 && this.getTileByCoord(left, y)) {
-      adjacentTiles.push(this.getTileByCoord(left, y));
-    };
-    if (down < 15 && this.getTileByCoord(x, down)) {
-      adjacentTiles.push(this.getTileByCoord(x, down));
-    };
-    if (right < 15 && this.getTileByCoord(right, y)) {
-      adjacentTiles.push(this.getTileByCoord(right, y));
-    };
-    if (up >= 0 && this.getTileByCoord(x, up)) {
-      adjacentTiles.push(this.getTileByCoord(x, up));
-    };
-
-    if(!adjacentTiles.length){
-      return null;
-    }
-    return adjacentTiles;
-  };
+  // getAdjacentTiles(x, y) {
+  //   const adjacentTiles = [];
+  //
+  //   const left = x-1
+  //   const up = y-1
+  //   const right = x+1
+  //   const down = y+1
+  //
+  //   if (left >= 0 && this.getTileByCoord(left, y)) {
+  //     adjacentTiles.push(this.getTileByCoord(left, y));
+  //   };
+  //   if (down < 15 && this.getTileByCoord(x, down)) {
+  //     adjacentTiles.push(this.getTileByCoord(x, down));
+  //   };
+  //   if (right < 15 && this.getTileByCoord(right, y)) {
+  //     adjacentTiles.push(this.getTileByCoord(right, y));
+  //   };
+  //   if (up >= 0 && this.getTileByCoord(x, up)) {
+  //     adjacentTiles.push(this.getTileByCoord(x, up));
+  //   };
+  //
+  //   if(!adjacentTiles.length){
+  //     return null;
+  //   }
+  //   return adjacentTiles;
+  // };
 
 }
 
@@ -104,4 +114,19 @@ function createMirrorLine() {
     mirrorLineArray.push(square);
   }
   return mirrorLineArray;
-}
+};
+
+function getAdjacentTile(position, directionKey, x, y) {
+  let searchX;
+  let searchY;
+
+  if(directionKey === `x`){
+    searchX = x+position;
+    searchY = y;
+  }else {
+    searchX = x;
+    searchY = y+position;
+  }
+
+  this.getSquareByCoord(searchX, searchY);
+};
