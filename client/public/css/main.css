@@ -4,3 +4,71 @@
   border: 1px solid black;
 
 }
+
+body {
+ background-color: darkgreen;
+ font-family: sans-serif;
+ text-align: center;
+ font-weight: bold;
+}
+
+h1 {
+ color: salmon;
+}
+
+td {
+ height: 2.5rem;
+ width: 2.5em;
+ background-color: gold;
+}
+
+td.triple-word {
+ background-color: red;
+}
+
+td.double-word {
+ background-color: pink;
+}
+
+td.triple-letter {
+ background-color: blue;
+}
+
+td.double-letter {
+ background-color: lightblue;
+}
+
+div {
+ display: inline-block;
+ vertical-align: top;
+ height: auto;
+}
+
+div.board {
+ margin: 1rem;
+}
+
+section {
+ display: block;
+ margin: 1rem;
+}
+
+section.rack {
+ display: flex;
+ align-items: bottom;
+ background-color: black;
+ padding: 0 1rem 1rem 1rem;
+}
+
+table {
+ display: inline;
+}
+
+td.score, td.swap-pass {
+ width: 4.5rem;
+ background-color: linen;
+}
+
+td.rack {
+ background-color: linen;
+}
