@@ -26,7 +26,7 @@ describe('Game', () => {
     assert.deepStrictEqual(game.players[1].name, 'Amaya');
   });
 
-  it('should be able to get the score of a player', () => {
+  it('should be able to get the scores of its players', () => {
     assert.deepStrictEqual(game.players[2].score, 0);
     player1.addToScore(345);
     player1.subtractFromScore(3);
@@ -58,13 +58,26 @@ describe('Game', () => {
     assert.deepStrictEqual(game.board.squares[19], undefined);
   });
 
-  it('should be able to determine leaders', () => {
+  it('should be able to determine leader(s)', () => {
     assert.deepStrictEqual(game.determineLeaders(), players);
     player1.addToScore(23);
     player2.addToScore(23);
     assert.deepStrictEqual(game.determineLeaders(), [player1, player2]);
     player3.addToScore(34);
     assert.deepStrictEqual(game.determineLeaders(), [player3]);
+  });
+
+  it('should be able to determine lead', () => {
+    assert.deepStrictEqual(game.determineLead(), 0);
+    player2.addToScore(5);
+    assert.deepStrictEqual(game.determineLead(), 5);
+    player3.addToScore(5);
+    assert.deepStrictEqual(game.determineLead(), 0);
+    player1.addToScore(59);
+    assert.deepStrictEqual(game.determineLead(), 54);
+    player2.addToScore(104);
+    assert.deepStrictEqual(game.determineLead(), 50);
+
   });
 
 

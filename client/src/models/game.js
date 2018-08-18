@@ -17,16 +17,26 @@ class Game {
   determineLeaders() {
     let leaders = [];
     const scores = this.players.map(player => player.score);
-    const maxScore = Math.max.apply(Math, scores);
+    const sortedScores = scores.sort((a,b) => a - b);
+    const highestScore = sortedScores.pop();
     this.players.forEach((player) => {
-      if (player.score === maxScore) {
+      if (player.score === highestScore) {
         leaders.push(player);
       };
     });
     return leaders;
   };
 
-  
+  determineLead() {
+    const scores = this.players.map(player => player.score);
+    console.log(scores);
+    const sortedScores = scores.sort((a,b) => a - b);
+    console.log(sortedScores);
+    const highestScore = sortedScores.pop();
+    const secondHighestScore = sortedScores.pop();
+    const lead = highestScore - secondHighestScore;
+    return lead;
+  };
 
 };
 
