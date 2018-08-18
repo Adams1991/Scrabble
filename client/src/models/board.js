@@ -32,12 +32,29 @@ class Board {
   };
 
   getTileBefore(directionKey, coordinates) {
-    return getAdjacentTile(-1, directionKey, coordinates);
-  }
+    const coord = getAdjacentTileCoord(-1, directionKey, coordinates);
+    console.log(coord);
+    const tile = this.getSquareByCoord(coordinates).tile;
+    if(tile !== null){
+      return {
+        tile: tile,
+        coord: coord
+      }
+    }
+    return null;
+  };
 
   getTileAfter(directionKey, coordinates) {
-    return getAdjacentTile(1, directionKey, coordinates);
-  }
+    const coord = getAdjacentTileCoord(1, directionKey, coordinates);
+    const tile = this.getSquareByCoord(coordinates).tile;
+    if(tile !== null){
+      return {
+        tile: tile,
+        coord: coord
+      }
+    }
+    return null;
+  };
 
   // getAdjacentTiles(x, y) {
   //   const adjacentTiles = [];
@@ -116,17 +133,13 @@ function createMirrorLine() {
   return mirrorLineArray;
 };
 
-function getAdjacentTile(position, directionKey, x, y) {
-  let searchX;
-  let searchY;
+function getAdjacentTileCoord(position, directionKey, coord) {
 
   if(directionKey === `x`){
-    searchX = x+position;
-    searchY = y;
+    coord.x += position
   }else {
-    searchX = x;
-    searchY = y+position;
-  }
+    coord.y += position
+  };
 
-  this.getSquareByCoord(searchX, searchY);
+  return coord;
 };

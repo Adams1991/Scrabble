@@ -81,9 +81,9 @@ describe("Board", () => {
   // });
 
   it("should be able to get the content of the square adjecent given a square and direction", () => {
-    board.addTileByCoord(tile1, 3, 5);
-    const result = board.getTileBefore(`x`, 2, 5);
-    assert.deepStrictEqual(result, tile1);
+    board.addTileByCoord(tile1, {x: 3, y: 5});
+    const result = board.getTileBefore(`x`, {x: 4, y: 5});
+    assert.deepStrictEqual(result, {tile: tile1, coord: {x: 3, y: 5}});
   })
 
 });
