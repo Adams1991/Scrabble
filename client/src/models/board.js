@@ -37,28 +37,17 @@ class Board {
     const right = x+1
     const down = y+1
 
-    console.log(`left`, left, left >= 0);
-    console.log(`up`, up, up >= 0);
-    console.log(`right`, right, right < 15);
-    console.log(`down`, down, down < 15);
-
     if (left >= 0 && this.getTileByCoord(left, y)) {
       adjacentTiles.push(this.getTileByCoord(left, y));
-      console.log(`left`, this.getTileByCoord(left, y));
     };
     if (down < 15 && this.getTileByCoord(x, down)) {
       adjacentTiles.push(this.getTileByCoord(x, down));
-      console.log(`down`, this.getTileByCoord(x, down));
-
     };
     if (right < 15 && this.getTileByCoord(right, y)) {
       adjacentTiles.push(this.getTileByCoord(right, y));
-      console.log(`right`, this.getTileByCoord(right, y));
-
     };
     if (up >= 0 && this.getTileByCoord(x, up)) {
       adjacentTiles.push(this.getTileByCoord(x, up));
-      console.log(`up`, this.getTileByCoord(x, up));
     };
 
     if(!adjacentTiles.length){
@@ -81,7 +70,8 @@ function createSquares() {
     for (var j = 0; j < 7; j++) {
       let square;
       if (i > j) {
-        square = startRowArray[j][i];
+        // need to change logic for mulitpliers
+        square = Object.assign(new Square, startRowArray[j][i]);
       }else{
         // Logic for multipliers here
         square = new Square();
@@ -89,7 +79,8 @@ function createSquares() {
       startColumnArray.push(square);
     };
 
-    const correctColumnArray = startColumnArray.map(square => square);
+    // need to change logic for mulitpliers
+    const correctColumnArray = startColumnArray.map(square => Object.assign(new Square, square));
     startColumnArray.reverse()
     correctColumnArray.push(mirrorLineArray[i]);
     const columnArray = correctColumnArray.concat(startColumnArray);
@@ -98,7 +89,7 @@ function createSquares() {
     startRowArray.push(columnArray);
   };
 
-  const correctRowArray = startRowArray.map(row => row);
+  const correctRowArray = startRowArray.map(row => row.map(square => Object.assign(new Square, square)));
   startRowArray.reverse();
   correctRowArray.push(mirrorLineArray);
   const rowArray = correctRowArray.concat(startRowArray);
