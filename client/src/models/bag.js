@@ -56,7 +56,7 @@ class Bag {
   removeRandomTile() {
     const numberOfTiles = this.tiles.length;
     const randomNumber = Math.floor(numberOfTiles*Math.random());
-    return this.tiles.splice(randomNumber, 1);
+    return this.tiles.splice(randomNumber, 1)[0];
   };
 
   removeRandomTiles(quantity) {
@@ -64,7 +64,7 @@ class Bag {
     for (let i=1; i<=quantity; i++) {
       const numberOfTiles = this.tiles.length;
       const randomNumber = Math.floor(numberOfTiles*Math.random());
-      const tile = this.tiles.splice(randomNumber, 1);
+      const tile = this.tiles.splice(randomNumber, 1)[0];
       tiles.push(tile);
     };
     return tiles;

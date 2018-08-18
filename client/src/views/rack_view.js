@@ -20,11 +20,11 @@ function createRack(container) {
   const rack = new Rack();
   const bag = new Bag();
   rack.addTiles(bag.removeRandomTiles(7));
+  console.log(bag.removeRandomTiles(7));
   const tiles = rack.tiles;
   tiles.forEach((tile, index) => {
     const tileSlot = document.createElement(`div`);
     tileSlot.id = index;
-    tileSlot.value = tile.value;
     tileSlot.textContent = tile.letter;
     container.appendChild(tileSlot);
   })
