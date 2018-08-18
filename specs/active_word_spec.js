@@ -14,9 +14,11 @@ describe("Active Word", () => {
     tile1 = new Tile("A", 1);
     tile2 = new Tile("B", 3);
     tile3 = new Tile("E", 1);
+    tile4 = new Tile("U", 1);
     firstLocatedTile = {tile: tile1, coord: {x:0, y:12}}
     secondLocatedTile = {tile: tile2, coord: {x:0, y:13}}
     thirdLocatedTile = {tile: tile3, coord: {x:0, y:14}}
+    fourthLocatedTile = {tile: tile4, coord: {x:1, y:14}}
     activeWord = new ActiveWord(firstLocatedTile, secondLocatedTile);
   });
 
@@ -26,9 +28,17 @@ describe("Active Word", () => {
   });
 
   it("should be able to have tile added that has correct direction", () => {
-    activeWord.addTile(thirdLocatedTile);
-    const result = activeWord.tiles.length;
-    assert.deepStrictEqual(result, 3);
+    const result1 =activeWord.addTile(thirdLocatedTile);
+    const result2 = activeWord.tiles.length;
+    assert.deepStrictEqual(result1, true);
+    assert.deepStrictEqual(result2, 3);
+  })
+
+  it("should be not able to have tile added that has incorrect direction", () => {
+    const result1 = activeWord.addTile(fourthLocatedTile);
+    const result2 = activeWord.tiles.length;
+    assert.deepStrictEqual(result1, false);
+    assert.deepStrictEqual(result2, 2);
   })
 
 });
