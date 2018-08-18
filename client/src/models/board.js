@@ -33,55 +33,42 @@ class Board {
 
   getTileBefore(directionKey, coordinates) {
     const coord = getAdjacentTileCoord(-1, directionKey, coordinates);
-    console.log(coord);
-    const tile = this.getSquareByCoord(coordinates).tile;
-    if(tile !== null){
-      return {
-        tile: tile,
-        coord: coord
-      }
-    }
+    if(coord !== null){
+      const tile = this.getSquareByCoord(coord).tile;
+      if(tile !== null){
+        return {tile: tile, coord: coord};
+      };
+    };
     return null;
   };
 
   getTileAfter(directionKey, coordinates) {
     const coord = getAdjacentTileCoord(1, directionKey, coordinates);
-    const tile = this.getSquareByCoord(coordinates).tile;
-    if(tile !== null){
-      return {
-        tile: tile,
-        coord: coord
-      }
-    }
+    if(coord !== null){
+      const tile = this.getSquareByCoord(coord).tile;
+      if(tile !== null){
+        return {tile: tile, coord: coord}
+      };
+    };
     return null;
   };
 
-  // getAdjacentTiles(x, y) {
-  //   const adjacentTiles = [];
-  //
-  //   const left = x-1
-  //   const up = y-1
-  //   const right = x+1
-  //   const down = y+1
-  //
-  //   if (left >= 0 && this.getTileByCoord(left, y)) {
-  //     adjacentTiles.push(this.getTileByCoord(left, y));
-  //   };
-  //   if (down < 15 && this.getTileByCoord(x, down)) {
-  //     adjacentTiles.push(this.getTileByCoord(x, down));
-  //   };
-  //   if (right < 15 && this.getTileByCoord(right, y)) {
-  //     adjacentTiles.push(this.getTileByCoord(right, y));
-  //   };
-  //   if (up >= 0 && this.getTileByCoord(x, up)) {
-  //     adjacentTiles.push(this.getTileByCoord(x, up));
-  //   };
-  //
-  //   if(!adjacentTiles.length){
-  //     return null;
-  //   }
-  //   return adjacentTiles;
-  // };
+  getAdjacentTiles(coordinates) {
+    const adjacentTiles = [];
+
+    const topTile = this.getTileBefore(`y`, coordinates);
+    const rightTile = this.getTileAfter(`x`, coordinates);
+    const bottomTile = this.getTileAfter(`y`, coordinates);
+    const leftTile = this.getTileBefore(`x`, coordinates);
+
+    if(topTile !== null){adjacentTiles.push(topTile)};
+    if(rightTile !== null){adjacentTiles.push(rightTile)};
+    if(bottomTile !== null){adjacentTiles.push(bottomTile)};
+    if(leftTile !== null){adjacentTiles.push(leftTile)};
+
+    if(adjacentTiles.length === 0){return null};
+    return adjacentTiles;
+  };
 
 }
 
@@ -111,7 +98,6 @@ function createSquares() {
     startColumnArray.reverse()
     correctColumnArray.push(mirrorLineArray[i]);
     const columnArray = correctColumnArray.concat(startColumnArray);
-    // console.log(columnArray.length);
 
     startRowArray.push(columnArray);
   };
@@ -135,11 +121,19 @@ function createMirrorLine() {
 
 function getAdjacentTileCoord(position, directionKey, coord) {
 
-  if(directionKey === `x`){
-    coord.x += position
-  }else {
-    coord.y += position
+  if(directionKey === `x` && (coord.x + position) < 15 && (coord.x + position) >= 0){
+    return {
+      x: coord.x + position,
+      y: coord.y
+    };
+  }
+
+  if(directionKey === `y` && (coord.y + position) < 15 && (coord.y + position) >= 0){
+    return {
+      x: coord.x ,
+      y: coord.y + position
+    };
   };
 
-  return coord;
+  return null;
 };

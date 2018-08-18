@@ -50,40 +50,106 @@ describe("Board", () => {
     assert.strictEqual(result2, 0);
   });
 
-  // it("should return null if there are no tiles in squares adjacent to a given square", () => {
-  //   const result = board.getAdjacentTiles(3, 5);
-  //   assert.deepStrictEqual(result, null);
-  // });
+  it("should return null if there are no tiles in squares adjacent to a given square", () => {
+    const result = board.getAdjacentTiles({x: 3, y: 5});
+    assert.deepStrictEqual(result, null);
+  });
 
-  // it("should return array of adjacent tiles for a given square if tiles are adjacent", () => {
-  //   board.addTileByCoord(tile1, 3, 5);
-  //   board.addTileByCoord(tile2, 4, 6);
-  //   const result = board.getAdjacentTiles(4, 5);
-  //   assert.deepStrictEqual(result, [tile1, tile2]);
-  // });
+  it("should return array of adjacent tiles for a given square if tiles are adjacent", () => {
+    board.addTileByCoord(tile1, {x: 3, y: 5});
+    board.addTileByCoord(tile2, {x: 4, y: 6});
 
-  // it("should be able to check edge squares for adjacent tiles", () => {
-  //   board.addTileByCoord(tile1, 0, 1);
-  //   board.addTileByCoord(tile2, 14, 1);
-  //   board.addTileByCoord(tile3, 13, 14);
-  //   board.addTileByCoord(tile4, 1, 14);
-  //
-  //
-  //   const result1 = board.getAdjacentTiles(0, 0);
-  //   const result2 = board.getAdjacentTiles(14, 0);
-  //   const result3 = board.getAdjacentTiles(14, 14);
-  //   const result4 = board.getAdjacentTiles(0, 14);
-  //
-  //   assert.deepStrictEqual(result1, [tile1]);
-  //   assert.deepStrictEqual(result2, [tile2]);
-  //   assert.deepStrictEqual(result3, [tile3]);
-  //   assert.deepStrictEqual(result4, [tile4]);
-  // });
+    const result = board.getAdjacentTiles({x: 4, y: 5});
+    assert.deepStrictEqual(
+      result,
+      [{
+        tile: tile2,
+        coord: {x: 4, y: 6}
+      },
+      {
+        tile: tile1,
+        coord: {x: 3, y: 5}
+      }]
+    );
+  });
+
+  it("should be able to check edge squares for adjacent tiles", () => {
+    board.addTileByCoord(tile1, {x: 0, y: 1});
+    board.addTileByCoord(tile2, {x: 14, y: 1});
+    board.addTileByCoord(tile3, {x: 13, y: 14});
+    board.addTileByCoord(tile4, {x: 1, y: 14});
+
+    const result1 = board.getAdjacentTiles({x: 0, y: 0});
+    const result2 = board.getAdjacentTiles({x: 14, y: 0});
+    const result3 = board.getAdjacentTiles({x: 14, y: 14});
+    const result4 = board.getAdjacentTiles({x: 0, y: 14});
+
+    assert.deepStrictEqual(
+      result1,
+      [{
+        tile: tile1,
+        coord: {x: 0, y: 1}
+      }]
+    );
+    assert.deepStrictEqual(
+      result2,
+      [{
+        tile: tile2,
+        coord: {x: 14, y: 1}
+      }]
+    );
+    assert.deepStrictEqual(
+      result3,
+      [{
+        tile: tile3,
+        coord: {x: 13, y: 14}
+      }]
+    );
+    assert.deepStrictEqual(
+      result4,
+      [{
+        tile: tile4,
+        coord: {x: 1, y: 14}
+      }]
+    );
+  });
 
   it("should be able to get the content of the square adjecent given a square and direction", () => {
-    board.addTileByCoord(tile1, {x: 3, y: 5});
-    const result = board.getTileBefore(`x`, {x: 4, y: 5});
-    assert.deepStrictEqual(result, {tile: tile1, coord: {x: 3, y: 5}});
-  })
+    board.addTileByCoord(tile1, {x: 1, y: 0});
+    board.addTileByCoord(tile2, {x: 0, y: 1});
+
+    const result1 = board.getTileBefore(`x`, {x: 2, y: 0});
+    const result2 = board.getTileBefore(`y`, {x: 1, y: 1});
+    const result3 = board.getTileAfter(`y`, {x: 0, y: 0});
+    const result4 = board.getTileAfter(`x`, {x: 0, y: 0});
+    assert.deepStrictEqual(
+      result1,
+      {
+        tile: tile1,
+        coord: {x: 1, y: 0}
+      }
+    );
+    assert.deepStrictEqual(
+      result2,
+      {
+        tile: tile1,
+        coord: {x: 1, y: 0}
+      }
+    );
+    assert.deepStrictEqual(
+      result3,
+      {
+        tile: tile2,
+        coord: {x: 0, y: 1}
+      }
+    );
+    assert.deepStrictEqual(
+      result4,
+      {
+        tile: tile1,
+        coord: {x: 1, y: 0}
+      }
+    );
+  });
 
 });
