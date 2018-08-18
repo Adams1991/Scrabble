@@ -10,7 +10,10 @@ describe("Board", () => {
   beforeEach(() => {
 
     board = new Board();
-    tile = new Tile(`A`, 1);
+    tile1 = new Tile(`A`, 1);
+    tile2 = new Tile(`E`, 1);
+    tile3 = new Tile(`I`, 1);
+    tile4 = new Tile(`O`, 1);
 
   });
 
@@ -27,20 +30,20 @@ describe("Board", () => {
   });
 
   it("should be able to add a tile by coordinates", () => {
-    board.addTileByCoord(tile, 3, 5);
+    board.addTileByCoord(tile1, 3, 5);
     const result = board.getTileByCoord(3, 5);
-    assert.deepStrictEqual(result, tile);
+    assert.deepStrictEqual(result, tile1);
   });
 
   it("should be able to remove a tile by coordinates", () => {
-    board.addTileByCoord(tile, 3, 5);
+    board.addTileByCoord(tile1, 3, 5);
     board.removeTileByCoord(3, 5);
     const result = board.getTileByCoord(3, 5);
     assert.strictEqual(result, null);
   });
 
   it("should be able to get a squares value for a given coordinate", () => {
-    board.addTileByCoord(tile, 3, 5);
+    board.addTileByCoord(tile1, 3, 5);
     const result1 = board.getSquareValueByCoord(3, 5);
     const result2 = board.getSquareValueByCoord(10, 4);
     assert.strictEqual(result1, 1);
@@ -53,9 +56,28 @@ describe("Board", () => {
   });
 
   it("should return array of adjacent tiles for a given square if tiles are adjacent", () => {
-    board.addTileByCoord(tile, 3, 5);
+    board.addTileByCoord(tile1, 3, 5);
+    board.addTileByCoord(tile2, 4, 6);
     const result = board.getAdjacentTiles(4, 5);
-    assert.deepStrictEqual(result, [tile]);
+    assert.deepStrictEqual(result, [tile1, tile2]);
   });
+
+  it("should be able to check edge squares for adjacent tiles", () => {
+    board.addTileByCoord(tile1, 0, 1);
+    board.addTileByCoord(tile2, 14, 1);
+    board.addTileByCoord(tile3, 13, 14);
+    board.addTileByCoord(tile4, 1, 14);
+
+
+    const result1 = board.getAdjacentTiles(0, 0);
+    const result2 = board.getAdjacentTiles(14, 0);
+    const result3 = board.getAdjacentTiles(14, 14);
+    const result4 = board.getAdjacentTiles(0, 14);
+
+    assert.deepStrictEqual(result1, [tile1]);
+    assert.deepStrictEqual(result2, [tile2]);
+    assert.deepStrictEqual(result3, [tile3]);
+    assert.deepStrictEqual(result4, [tile4]);
+  })
 
 });
