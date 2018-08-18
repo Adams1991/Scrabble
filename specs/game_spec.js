@@ -26,4 +26,8 @@ describe('Game', () => {
     assert.deepStrictEqual(game.bag.tiles.length, 100);
   });
 
+  it('should have a board with 15 rows', () => {
+    assert.deepStrictEqual(game.board.squares.length, 15);
+  });
+
 });
