@@ -32,13 +32,16 @@ describe("Active Word", () => {
     const result2 = activeWord.tiles.length;
     assert.deepStrictEqual(result1, true);
     assert.deepStrictEqual(result2, 3);
-  })
+  });
 
   it("should be not able to have tile added that has incorrect direction", () => {
     const result1 = activeWord.addTile(fourthLocatedTile);
     const result2 = activeWord.tiles.length;
     assert.deepStrictEqual(result1, false);
     assert.deepStrictEqual(result2, 2);
-  })
+  });
+
+
+
 
 });
