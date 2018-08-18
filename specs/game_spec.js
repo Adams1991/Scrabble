@@ -22,6 +22,10 @@ describe('Game', () => {
     assert.deepStrictEqual(game.players.length, 3);
   });
 
+  it('should be able to get the names of its players', () => {
+    assert.deepStrictEqual(game.players[1].name, 'Amaya');
+  });
+
   it('should have a full bag of tiles on start', () => {
     assert.deepStrictEqual(game.bag.tiles.length, 100);
   });
