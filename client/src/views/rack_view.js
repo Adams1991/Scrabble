@@ -26,6 +26,7 @@ function createRack(container) {
     const tileSlot = document.createElement(`div`);
     tileSlot.id = index;
     tileSlot.textContent = tile.letter;
+    tileSlot.classList.add('tileSlot');
     container.appendChild(tileSlot);
   })
   return container;
