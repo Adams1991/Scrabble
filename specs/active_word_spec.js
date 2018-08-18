@@ -7,7 +7,13 @@ describe("Active Word", () => {
   let tile1;
   let tile2;
   let tile3;
+  let tile4;
+  let tile5;
   let firstLocatedTile;
+  let secondLocatedTile;
+  let thirdLocatedTile;
+  let fourthLocatedTile;
+  let fifthLocatedTile;
   let activeWord;
 
   beforeEach(() => {
@@ -15,10 +21,12 @@ describe("Active Word", () => {
     tile2 = new Tile("B", 3);
     tile3 = new Tile("E", 1);
     tile4 = new Tile("U", 1);
-    firstLocatedTile = {tile: tile1, coord: {x:0, y:12}}
-    secondLocatedTile = {tile: tile2, coord: {x:0, y:13}}
-    thirdLocatedTile = {tile: tile3, coord: {x:0, y:14}}
-    fourthLocatedTile = {tile: tile4, coord: {x:1, y:14}}
+    tile4 = new Tile("I", 1);
+    firstLocatedTile = {tile: tile1, coord: {x:0, y:11}}
+    secondLocatedTile = {tile: tile2, coord: {x:0, y:12}}
+    thirdLocatedTile = {tile: tile3, coord: {x:0, y:13}}
+    fourthLocatedTile = {tile: tile4, coord: {x:1, y:13}}
+    fifthLocatedTile = {tile: tile5, coord: {x:0, y:9}}
     activeWord = new ActiveWord(firstLocatedTile, secondLocatedTile);
   });
 
@@ -34,11 +42,13 @@ describe("Active Word", () => {
     assert.deepStrictEqual(result2, 3);
   });
 
-  it("should be not able to have tile added that has incorrect direction", () => {
+  it("should be not able to have tile added that doesn't join the active word", () => {
     const result1 = activeWord.addTile(fourthLocatedTile);
-    const result2 = activeWord.tiles.length;
+    const result2 = activeWord.addTile(fifthLocatedTile);
+    const result3 = activeWord.tiles.length;
     assert.deepStrictEqual(result1, false);
-    assert.deepStrictEqual(result2, 2);
+    assert.deepStrictEqual(result2, false);
+    assert.deepStrictEqual(result3, 2);
   });
 
 
