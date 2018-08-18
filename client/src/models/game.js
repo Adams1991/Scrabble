@@ -10,6 +10,9 @@ class Game {
     this.bag = new Bag();
   };
 
+  getNumberOfTilesInBag() {
+    return this.bag.getNumberOfTiles();
+  };
 
 
 

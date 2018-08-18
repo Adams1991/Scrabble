@@ -33,6 +33,7 @@ describe("Bag", () => {
 
   it("should be full on creation", () => {
     assert.deepStrictEqual(bag.tiles.length, 100);
+    assert.deepStrictEqual(bag.getNumberOfTiles(), 100);
     assert.deepStrictEqual(bag.tiles[98].value, 0);
     assert.deepStrictEqual(bag.tiles[50].letter, "L");
   });
@@ -40,11 +41,13 @@ describe("Bag", () => {
   it("should be able to remove random tile", () => {
     const tile = bag.removeRandomTile()[0];
     assert.deepStrictEqual(bag.tiles.length, 99);
+    assert.deepStrictEqual(bag.getNumberOfTiles(), 99);
   });
 
   it("should be able to remove random tiles", () => {
     const tiles = bag.removeRandomTiles(7);
     assert.deepStrictEqual(bag.tiles.length, 93);
+    assert.deepStrictEqual(bag.getNumberOfTiles(), 93);
     assert.deepStrictEqual(tiles.length, 7);
   });
 

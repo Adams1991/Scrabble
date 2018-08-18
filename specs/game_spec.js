@@ -35,6 +35,16 @@ describe('Game', () => {
 
   it('should have a full bag of tiles on start', () => {
     assert.deepStrictEqual(game.bag.tiles.length, 100);
+    assert.deepStrictEqual(game.bag.getNumberOfTiles(), 100);
+  });
+
+  it('should be able to get the number of tiles in a bag', () => {
+    game.bag.removeRandomTiles(7);
+    game.bag.removeRandomTiles(7);
+    game.bag.removeRandomTiles(7);
+    assert.deepStrictEqual(game.bag.tiles.length, 79);
+    assert.deepStrictEqual(game.bag.getNumberOfTiles(), 79);
+    assert.deepStrictEqual(game.getNumberOfTilesInBag(), 79);
   });
 
   it('should have a board with 15 rows', () => {
