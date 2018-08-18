@@ -26,6 +26,13 @@ describe('Game', () => {
     assert.deepStrictEqual(game.players[1].name, 'Amaya');
   });
 
+  it('should be able to get the score of a player', () => {
+    assert.deepStrictEqual(game.players[2].score, 0);
+    player1.addToScore(345);
+    player1.subtractFromScore(3);
+    assert.deepStrictEqual(game.players[0].score, 342);
+  });
+
   it('should have a full bag of tiles on start', () => {
     assert.deepStrictEqual(game.bag.tiles.length, 100);
   });
