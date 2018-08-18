@@ -30,4 +30,11 @@ describe('Game', () => {
     assert.deepStrictEqual(game.board.squares.length, 15);
   });
 
+  it('should have a board with 15 columns', () => {
+    assert.deepStrictEqual(game.board.squares[3].length, 15);
+    assert.deepStrictEqual(game.board.squares[7].length, 15);
+    assert.deepStrictEqual(game.board.squares[14].length, 15);
+    assert.deepStrictEqual(game.board.squares[19], undefined);
+  });
+
 });
