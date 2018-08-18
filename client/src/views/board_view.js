@@ -1,4 +1,5 @@
 const Board = require("../models/board.js");
+const PubSub = require('../helpers/pub_sub.js');
 
 class BoardView {
   constructor(table) {
@@ -7,6 +8,11 @@ class BoardView {
 
   bindEvents(){
     createTable(this.table);
+    this.table.addEventListener('click', (evt) => {
+      const squareCoord = evt.target.id;
+      PubSub.publish(`BoardView:coord-of-last-square-clicked`, squareCoord);
+      console.log(squareCoord);
+    })
   };
 
 
@@ -24,7 +30,7 @@ function addRow(table, row, y) {
   const htmlRow = document.createElement(`tr`);
   for (var x = 0; x < row.length; x++) {
     const cell = document.createElement(`td`);
-    cell.id = `x${x}y${y}`;
+    cell.id = `${x}:${y}`;
     cell.classList.add('square');
     htmlRow.appendChild(cell);
   }
