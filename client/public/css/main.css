@@ -5,6 +5,13 @@
 
 }
 
+.tileSlot {
+  height: 50px;
+  width: 50px;
+  border: 1px solid black;
+  background-color: red;
+}
+
 body {
  background-color: darkgreen;
  font-family: sans-serif;
