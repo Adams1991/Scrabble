@@ -3,7 +3,7 @@ const Game = require('../client/src/models/game.js');
 const Player = require('../client/src/models/player.js');
 const Bag = require('../client/src/models/bag.js');
 
-describe("Game", () => {
+describe('Game', () => {
 
   let player1;
   let player2;
@@ -20,6 +20,10 @@ describe("Game", () => {
 
   it('should have the number of players passed in', () => {
     assert.deepStrictEqual(game.players.length, 3);
+  });
+
+  it('should have a full bag of tiles on start', () => {
+    assert.deepStrictEqual(game.bag.tiles.length, 100);
   });
 
 });
