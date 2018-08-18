@@ -31,17 +31,34 @@ class Board {
 
   getAdjacentTiles(x, y) {
     const adjacentTiles = [];
-    if (this.getTileByCoord(x-1, y)) {
-      adjacentTiles.push(this.getTileByCoord(x-1, y));
+
+    const left = x-1
+    const up = y-1
+    const right = x+1
+    const down = y+1
+
+    console.log(`left`, left, left >= 0);
+    console.log(`up`, up, up >= 0);
+    console.log(`right`, right, right < 15);
+    console.log(`down`, down, down < 15);
+
+    if (left >= 0 && this.getTileByCoord(left, y)) {
+      adjacentTiles.push(this.getTileByCoord(left, y));
+      console.log(`left`, this.getTileByCoord(left, y));
     };
-    if (this.getTileByCoord(x, y+1)) {
-      adjacentTiles.push(this.getTileByCoord(x, y+1));
+    if (down < 15 && this.getTileByCoord(x, down)) {
+      adjacentTiles.push(this.getTileByCoord(x, down));
+      console.log(`down`, this.getTileByCoord(x, down));
+
     };
-    if (this.getTileByCoord(x+1, y)) {
-      adjacentTiles.push(this.getTileByCoord(x+1, y));
+    if (right < 15 && this.getTileByCoord(right, y)) {
+      adjacentTiles.push(this.getTileByCoord(right, y));
+      console.log(`right`, this.getTileByCoord(right, y));
+
     };
-    if (this.getTileByCoord(x, y-1)) {
-      adjacentTiles.push(this.getTileByCoord(x, y-1));
+    if (up >= 0 && this.getTileByCoord(x, up)) {
+      adjacentTiles.push(this.getTileByCoord(x, up));
+      console.log(`up`, this.getTileByCoord(x, up));
     };
 
     if(!adjacentTiles.length){
