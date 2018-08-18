@@ -51,6 +51,13 @@ describe("Active Word", () => {
     assert.deepStrictEqual(result3, 2);
   });
 
+  it("should be able to get word as string", () => {
+    const result = activeWord.getWord();
+    assert.deepStrictEqual(result, "AB");
+  });
+
+
+
 
 
 

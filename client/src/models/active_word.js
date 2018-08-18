@@ -25,6 +25,14 @@ class ActiveWord {
     return false;
   };
 
+  getWord(){
+    const completeWord = this.tiles.reduce((word, placedTile) => {
+      const letter = placedTile.tile.letter
+      return word + letter
+    }, "")
+    return completeWord;
+  }
+
 
 }
 
