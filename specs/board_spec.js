@@ -61,8 +61,10 @@ describe("Board", () => {
   it("should be able to check edge squares for adjacent tiles", () => {
     board.addTileByCoord(tile, 2, 5);
     board.addTileByCoord(tile, 14, 5);
-    const result = board.getAdjacentTiles(1, 5);
-    assert.deepStrictEqual(result, [tile]);
+    const result1 = board.getAdjacentTiles(1, 5);
+    const result2 = board.getAdjacentTiles(14, 6);
+    assert.deepStrictEqual(result1, [tile]);
+    assert.deepStrictEqual(result2, [tile]);
   })
 
 });
