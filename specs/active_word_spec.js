@@ -56,6 +56,11 @@ describe("Active Word", () => {
     assert.deepStrictEqual(result, "AB");
   });
 
+  it("should be able to get wordScore", () => {
+    const result = activeWord.getWordScore();
+    assert.deepStrictEqual(result, 4);
+  });
+
 
 
 

@@ -27,10 +27,18 @@ class ActiveWord {
 
   getWord(){
     const completeWord = this.tiles.reduce((word, placedTile) => {
-      const letter = placedTile.tile.letter
+      const letter = placedTile.tile.letter;
       return word + letter
     }, "")
     return completeWord;
+  }
+
+  getWordScore(){
+    const completeWordScore = this.tiles.reduce((wordScore, placedTile) => {
+      const tileScore = placedTile.tile.value;
+      return wordScore + tileScore
+    }, 0)
+    return completeWordScore; 
   }
 
 
