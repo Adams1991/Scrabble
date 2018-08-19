@@ -1,7 +1,15 @@
 class ActiveWord {
   constructor(firstLocatedTile, secondLocatedTile) {
-    this.tiles = [firstLocatedTile, secondLocatedTile];
     this.direction = calculateDirection(firstLocatedTile.coord, secondLocatedTile.coord);
+    if (this.direction === null){
+      this.tiles = null;
+    }else {
+      this.tiles = [firstLocatedTile];
+      if(!this.addTile(secondLocatedTile)){
+        this.direction = null;
+        this.tiles = null;
+      };
+    }
   }
 
 
