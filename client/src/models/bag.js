@@ -32,6 +32,10 @@ class Bag {
     this.addNewTiles('', 0, 2);
   };
 
+  getNumberOfTiles() {
+    return this.tiles.length;
+  };
+
   addTile(tile) {
     this.tiles.push(tile);
   };
