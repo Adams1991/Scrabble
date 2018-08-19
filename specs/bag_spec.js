@@ -51,4 +51,10 @@ describe("Bag", () => {
     assert.deepStrictEqual(tiles.length, 7);
   });
 
+  it("should return the remaining tiles in the bag if asked for more than is left", () => {
+    const tiles = bag.removeRandomTiles(101);
+    const result = tiles.length;
+    assert.strictEqual(result, 100);
+  });
+
 });

@@ -65,11 +65,16 @@ class Bag {
 
   removeRandomTiles(quantity) {
     const tiles = [];
-    for (let i=1; i<=quantity; i++) {
-      const numberOfTiles = this.tiles.length;
-      const randomNumber = Math.floor(numberOfTiles*Math.random());
-      const tile = this.tiles.splice(randomNumber, 1)[0];
-      tiles.push(tile);
+    if(quantity >= this.tiles.length){
+      this.tiles.forEach(tile => tiles.push(tile));
+      this.tiles = [];
+    } else {
+      for (let i=1; i<=quantity; i++) {
+        const numberOfTiles = this.tiles.length;
+        const randomNumber = Math.floor(numberOfTiles*Math.random());
+        const tile = this.tiles.splice(randomNumber, 1)[0];
+        tiles.push(tile);
+      };
     };
     return tiles;
   };
