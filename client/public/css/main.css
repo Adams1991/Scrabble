@@ -13,11 +13,11 @@
 }
 
 body {
- background-color: black;
- font-family: sans-serif;
- text-align: center;
- font-weight: bold;
- color: white;
+  background-color: black;
+  font-family: sans-serif;
+  text-align: center;
+  font-weight: bold;
+  color: white;
 }
 
 h1 {
@@ -52,39 +52,39 @@ div {
  height: auto;
 }
 
-div.button-container {
+div.button-container, div.main {
   display: flex;
   justify-content: center;
   align-items: center;
 }
 
 div.board {
- margin: 1rem;
+  margin: 1rem;
 }
 
 section {
- display: block;
- margin: 1rem;
+  display: block;
+  margin: 1rem;
 }
 
 section.rack {
- display: flex;
- align-items: bottom;
- background-color: black;
- padding: 0 1rem 1rem 1rem;
+  display: flex;
+  align-items: bottom;
+  background-color: black;
+  padding: 0 1rem 1rem 1rem;
 }
 
 table {
- display: inline;
+  display: inline;
 }
 
 td.score, td.swap-pass {
- width: 4.5rem;
- background-color: linen;
+  width: 4.5rem;
+  background-color: linen;
 }
 
 td.rack {
- background-color: linen;
+  background-color: linen;
 }
 
 button {
@@ -126,4 +126,18 @@ form, input, submit {
   font-size: 1rem;
   margin: 0.5rem;
   padding: 0.5rem;
+}
+
+li {
+  list-style-type: none;
+}
+
+form {
+  position: fixed;
+  top: 30%;
+}
+
+ol {
+  padding: 0;
+  margin: 0;
 }
