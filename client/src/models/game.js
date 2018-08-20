@@ -8,6 +8,7 @@ class Game {
     this.players = players;
     this.board = new Board();
     this.bag = new Bag();
+    giveStartingTiles(players, this.bag);
   };
 
   getNumberOfTilesInBag() {
@@ -43,3 +44,10 @@ class Game {
 };
 
 module.exports = Game;
+
+function giveStartingTiles(players, bag) {
+  players.forEach(player => {
+    const tiles = bag.removeRandomTiles(7);
+    player.addTilesToRack(tiles);
+  });
+};

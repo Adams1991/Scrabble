@@ -14,7 +14,8 @@ class Turn {
       this.tile = null;
       this.coord = null;
       this.game = evt.detail;
-      console.dir(this.game);
+      PubSub.publish(`PlayerView:display-view`, this.game.players[0]);
+
       //TODO: render player view (setup evt for rack)
     })
 

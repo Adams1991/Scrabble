@@ -8,14 +8,12 @@ class RackView {
     this.container = container;
   }
 
-  bindEvents(){
-    PubSub.subscribe(`RackView:create-rack`, () => {
-      createRack(this.container);
-      this.container.addEventListener('click', (evt) => {
-        const tileIndex = evt.target.id;
-        PubSub.publish(`Turn:index-last-clicked-tile`, tileIndex);
-        console.log(tileIndex);
-      })
+  bindEvents(rack){
+    createRack(this.container, rack);
+    this.container.addEventListener('click', (evt) => {
+      const tileIndex = evt.target.id;
+      PubSub.publish(`Turn:index-last-clicked-tile`, tileIndex);
+      console.log(tileIndex);
     })
 
 
@@ -26,10 +24,7 @@ class RackView {
 
 module.exports = RackView;
 
-function createRack(container) {
-  const rack = new Rack();
-  const bag = new Bag();
-  rack.addTiles(bag.removeRandomTiles(7));
+function createRack(container, rack) {
   const tiles = rack.tiles;
   tiles.forEach((tile, index) => {
     const tileSlot = document.createElement(`div`);
