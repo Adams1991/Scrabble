@@ -64,19 +64,23 @@ class Turn {
             }
           }else {
             this.coord = activeCoord;
+            this.game.board.addTileByCoord(this.tile, this.coord);
+            PubSub.publish('BoardView:update-board', this.game.board.squares);
           }
         }else {
           this.coord = activeCoord;
           if(this.tile !== null && this.coord !== null){
+            this.game.board.addTileByCoord(this.tile, this.coord);
+            PubSub.publish('BoardView:update-board', this.game.board.squares);
             const placedTile = {tile: this.tile, coord: this.coord};
             if (this.primaryActiveWord.addTile(placedTile)){
               this.tile = null;
             };
             this.coord = null;
-            console.dir(this.primaryActiveWord);
           };
         };
       });
+
     });
 
   }
