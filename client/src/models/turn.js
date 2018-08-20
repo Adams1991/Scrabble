@@ -33,8 +33,15 @@ class Turn {
           }
         }else {
           this.tile = activeTile;
-          addToPrimaryActiveWord(this.primaryActiveWord, this.tile, this.coord);
-        }
+          if(this.tile !== null && this.coord !== null){
+            const placedTile = {tile: this.tile, coord: this.coord};
+            if (this.primaryActiveWord.addTile(placedTile)){
+              this.tile = null;
+            };
+            this.coord = null;
+            console.dir(this.primaryActiveWord);
+          };
+        };
       });
 
       PubSub.subscribe(`Turn:coord-of-last-square-clicked`, (evt) => {
@@ -46,13 +53,26 @@ class Turn {
           if (this.tile !== null && this.coord !== null) {
             this.secondCoord = activeCoord;
             this.primaryActiveWord = createActiveWord(this.tile, this.coord, this.secondTile, this.secondCoord)
+            if(this.primaryActiveWord !== null){
+              this.tile = null;
+              this.secondTile = null;
+              this.coord = null;
+              this.secondCoord = null;
+            }
           }else {
             this.coord = activeCoord;
           }
         }else {
           this.coord = activeCoord;
-          addToPrimaryActiveWord(this.primaryActiveWord, this.tile, this.coord);
-        }
+          if(this.tile !== null && this.coord !== null){
+            const placedTile = {tile: this.tile, coord: this.coord};
+            if (this.primaryActiveWord.addTile(placedTile)){
+              this.tile = null;
+            };
+            this.coord = null;
+            console.dir(this.primaryActiveWord);
+          };
+        };
       });
     });
 
@@ -61,10 +81,6 @@ class Turn {
 }
 
 module.exports = Turn;
-
-function addToPrimaryActiveWord() {
-
-}
 
 function createActiveWord(firstTile, firstCoord, secondTile, secondCoord) {
   const firstPlacedTile = {tile: firstTile, coord: firstCoord};
