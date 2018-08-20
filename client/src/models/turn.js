@@ -46,6 +46,12 @@ class Turn {
         console.dir(this.secondCoord);
         console.dir(this.secondTile);
         this.primaryActiveWord = createActiveWord(this.tile, this.coord, this.secondTile, this.secondCoord)
+        if (this.primaryActiveWord !== null){
+          this.tile = null;
+          this.secondTile = null;
+          this.coord = null;
+        }
+        this.secondCoord = null;
       }else {
         this[interactedElement.toLowerCase()] = activeDescriptor;
       }
