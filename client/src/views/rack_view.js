@@ -9,12 +9,15 @@ class RackView {
   }
 
   bindEvents(){
-    createRack(this.container);
-    this.container.addEventListener('click', (evt) => {
-      const tileIndex = evt.target.id;
-      PubSub.publish(`RackView:index-last-clicked-tile`, tileIndex);
-      console.log(tileIndex);
+    PubSub.subscribe(`RackView:create-rack`, () => {
+      createRack(this.container);
+      this.container.addEventListener('click', (evt) => {
+        const tileIndex = evt.target.id;
+        PubSub.publish(`Turn:index-last-clicked-tile`, tileIndex);
+        console.log(tileIndex);
+      })
     })
+
 
   };
 
