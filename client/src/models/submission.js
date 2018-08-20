@@ -21,8 +21,7 @@ module.exports = Submission;
 function saveNewGame(game, request) {
   request.post(game)
   .then(() => {
-    PubSub.publish(`TransitionView:current-game`, game);
-    console.log(game);
+    PubSub.publish(`NewGameView:create-game-view`, game);
   })
   .catch((err) => {
     console.error(err);

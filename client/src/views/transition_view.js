@@ -1,13 +1,17 @@
+const PubSub = require('../helpers/pub_sub.js');
+
 class TransitionView {
 
-  constructor(players){
+  constructor(container){
     this.game = null;
-    this.players = players;
+    this.container = container;
   };
 
   bindEvents(){
-
-    this.game = new Game(this.players);
+    PubSub.subscribe(`TransitionView:current-game`, (evt) => {
+      this.game = evt.detail;
+      
+    });
   }
 
 }
