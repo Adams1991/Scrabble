@@ -24,58 +24,42 @@ class Turn {
       PubSub.subscribe(`Turn:index-last-clicked-tile`, (evt) => {
         const rackIndex = evt.detail;
         const activeTile = this.player.getTileInRackByIndex(rackIndex);
-        if (this.primaryActiveWord === null){
-          if (this.tile !== null && this.coord !== null) {
-            this.secondTile = activeTile;
-            this.primaryActiveWord = createActiveWord(this.tile, this.coord, this.secondTile, this.secondCoord)
-          }else {
-            this.tile = activeTile;
-          }
-        }else {
-          this.tile = activeTile;
-          if(this.tile !== null && this.coord !== null){
-            const placedTile = {tile: this.tile, coord: this.coord};
-            if (this.primaryActiveWord.addTile(placedTile)){
-              this.tile = null;
-            };
-            this.coord = null;
-            console.dir(this.primaryActiveWord);
-          };
-        };
+        this.manipulatePrimaryWord(`Tile`, activeTile)
       });
+
 
       PubSub.subscribe(`Turn:coord-of-last-square-clicked`, (evt) => {
         const activeCoord = evt.detail;
         if(this.game.board.getTileByCoord(activeCoord) !== null){
           return;
-        }
-        if (this.primaryActiveWord === null){
-          if (this.tile !== null && this.coord !== null) {
-            this.secondCoord = activeCoord;
-            this.primaryActiveWord = createActiveWord(this.tile, this.coord, this.secondTile, this.secondCoord)
-            if(this.primaryActiveWord !== null){
-              this.tile = null;
-              this.secondTile = null;
-              this.coord = null;
-              this.secondCoord = null;
-            }
-          }else {
-            this.coord = activeCoord;
-          }
-        }else {
-          this.coord = activeCoord;
-          if(this.tile !== null && this.coord !== null){
-            const placedTile = {tile: this.tile, coord: this.coord};
-            if (this.primaryActiveWord.addTile(placedTile)){
-              this.tile = null;
-            };
-            this.coord = null;
-            console.dir(this.primaryActiveWord);
-          };
         };
+        this.manipulatePrimaryWord(`Coord`, activeCoord);
       });
     });
 
+  };
+
+  manipulatePrimaryWord(interactedElement, activeDescriptor){
+    if (this.primaryActiveWord === null){
+      if (this.tile !== null && this.coord !== null) {
+        this[`second${interactedElement}`] = activeDescriptor;
+        console.dir(this.secondCoord);
+        console.dir(this.secondTile);
+        this.primaryActiveWord = createActiveWord(this.tile, this.coord, this.secondTile, this.secondCoord)
+      }else {
+        this[interactedElement.toLowerCase()] = activeDescriptor;
+      }
+    }else {
+      this[interactedElement.toLowerCase()] = activeDescriptor;
+      if(this.tile !== null && this.coord !== null){
+        const placedTile = {tile: this.tile, coord: this.coord};
+        if (this.primaryActiveWord.addTile(placedTile)){
+          this.tile = null;
+        };
+        this.coord = null;
+        console.dir(this.primaryActiveWord);
+      };
+    };
   }
 
 }
