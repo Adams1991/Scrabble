@@ -93,8 +93,9 @@ class NewGameView {
         scoreView.bindEvents();
 
         // makes transition view
-        // const transitionView = new TransitionView(playerWrapper)
-        // transitionView.bindEvents();
+        const transitionView = new TransitionView(playerWrapper)
+        transitionView.bindEvents();
+        PubSub.publish('TransitionView:current-game', game);
       });
     });
 

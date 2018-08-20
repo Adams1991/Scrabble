@@ -14,6 +14,10 @@ class Game {
     return this.bag.getNumberOfTiles();
   };
 
+  getScores() {
+    return this.players.map(player => player.score);
+  };
+
   determineLeaders() {
     let leaders = [];
     const scores = this.players.map(player => player.score);

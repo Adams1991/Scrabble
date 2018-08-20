@@ -7,24 +7,25 @@ class BoardView {
   }
 
   bindEvents(){
-    createTable(this.table);
     this.table.addEventListener('click', (evt) => {
       const squareCoord = evt.target.id;
       PubSub.publish(`BoardView:coord-of-last-square-clicked`, squareCoord);
       console.log(squareCoord);
-    })
+    });
+    PubSub.subscribe('BoardView:update-board', (evt) => {
+      const squares = evt.detail;
+      createTable(this.table, squares);
+    });
   };
 
-
-}
+};
 
 module.exports = BoardView;
 
-function createTable(table) {
-  const board = new Board();
-  const squares = board.squares;
+function createTable(table, squares) {
+  this.table.innerHTML = ``;
   squares.reduce(addRow, table);
-}
+};
 
 function addRow(table, row, y) {
   const htmlRow = document.createElement(`tr`);
@@ -33,7 +34,7 @@ function addRow(table, row, y) {
     cell.id = `${x}:${y}`;
     cell.classList.add('square');
     htmlRow.appendChild(cell);
-  }
+  };
   table.appendChild(htmlRow);
   return table;
-}
+};
