@@ -85,8 +85,8 @@ class NewGameView {
         boardView.bindEvents();
 
         // makes player views
-        // const playerView = new PlayerView(playerWrapper);
-        // playerView.bindEvents();
+        const playerView = new PlayerView(playerWrapper);
+        playerView.bindEvents();
 
         // makes score views
         const scoreView = new ScoreView(scoreWrapper);
