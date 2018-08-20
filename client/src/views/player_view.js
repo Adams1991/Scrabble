@@ -10,9 +10,13 @@ class PlayerView {
 
     // setups rack
     const rackContainer = document.createElement('div');
+    rackContainer.id = "rack-container"
+    console.log(rackContainer);
+    this.container.appendChild(rackContainer)
     const rackView = new RackView(rackContainer);
     rackView.bindEvents();
-    this.container.appendChild(rackContainer);
+
+
 
     // setups swapButton
     const swapButton = document.createElement('button');
