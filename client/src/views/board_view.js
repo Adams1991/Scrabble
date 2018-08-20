@@ -8,9 +8,13 @@ class BoardView {
 
   bindEvents(){
     this.table.addEventListener('click', (evt) => {
-      const squareCoord = evt.target.id;
-      PubSub.publish(`BoardView:coord-of-last-square-clicked`, squareCoord);
-      console.log(squareCoord);
+      const squareCoordsArray = evt.target.id.split(`:`);
+      const squareCoords = {
+        x: parseInt(squareCoordsArray[0], 10),
+        y: parseInt(squareCoordsArray[1], 10)
+      };
+      PubSub.publish(`Turn:coord-of-last-square-clicked`, squareCoords);
+      console.log(squareCoords);
     });
     PubSub.subscribe('BoardView:update-board', (evt) => {
       const squares = evt.detail;
