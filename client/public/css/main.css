@@ -1,8 +1,8 @@
 .square {
-  height: 50px;
-  width: 50px;
-  border: 1px solid black;
-
+  height: 2.5rem;
+  width: 2.5rem;
+  /* border: 1px solid black; */
+  background-color: green;
 }
 
 .tileSlot {
@@ -13,14 +13,15 @@
 }
 
 body {
- background-color: darkgreen;
+ background-color: black;
  font-family: sans-serif;
  text-align: center;
  font-weight: bold;
+ color: white;
 }
 
 h1 {
- color: salmon;
+ color: green;
 }
 
 td {
@@ -51,6 +52,12 @@ div {
  height: auto;
 }
 
+div.button-container {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
 div.board {
  margin: 1rem;
 }
@@ -78,4 +85,45 @@ td.score, td.swap-pass {
 
 td.rack {
  background-color: linen;
+}
+
+button {
+  background-color: green;
+  color: black;
+  font-size: 1.2rem;
+  border-bottom: 2px solid darkslategrey;
+  border-right: 2px solid darkslategrey;
+  border-top: 0;
+  border-left: 0;
+  border-radius: 0.2rem;
+  padding: 0.5rem;
+}
+
+button#new-game {
+  position: fixed;
+  top: 50%;
+}
+
+/* td.rack {
+  background-color: black;
+} */
+
+.tile {
+  background-color: orange;
+  height: 2.3rem;
+  width: 2.3rem;
+  text-align: center;
+  vertical-align: middle;
+  line-height: 2.3rem;
+  border-radius: 0.2rem;
+  border-bottom: 2px solid maroon;
+  border-right: 2px solid maroon;
+}
+
+form, input, submit {
+  background-color: black;
+  color: green;
+  font-size: 1rem;
+  margin: 0.5rem;
+  padding: 0.5rem;
 }
