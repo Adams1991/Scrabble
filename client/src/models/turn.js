@@ -21,6 +21,7 @@ class Turn {
       this.player = this.game.players[0]
       PubSub.publish(`PlayerView:display-view`, this.player);
 
+
       PubSub.subscribe(`Turn:index-last-clicked-tile`, (evt) => {
         const rackIndex = evt.detail;
         const activeTile = this.player.getTileInRackByIndex(rackIndex);
@@ -42,6 +43,8 @@ class Turn {
             console.dir(this.primaryActiveWord);
           };
         };
+        this.player.removeTileFromRackByIndex(evt.Index);
+        PubSub.publish(`PlayerView:display-view`, this.player)
       });
 
       PubSub.subscribe(`Turn:coord-of-last-square-clicked`, (evt) => {
