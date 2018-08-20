@@ -1,3 +1,5 @@
+const PubSub = require('../helpers/pub_sub.js');
+
 class ScoreView {
   constructor(container) {
     this.container = container;
@@ -5,6 +7,31 @@ class ScoreView {
 
   bindEvents(){
     createScoreTable(this.container);
+
+    PubSub.subscribe(`ScoreView:update-scores`, (evt) => {
+      const game = evt.detail;
+      const players = game.players;
+      const table = this.container.childNodes[0]
+      const nameRow = table.childNodes[0];
+      const scoreRow = table.childNodes[1];
+
+      players.forEach(player => {
+        const name = document.createElement(`th`);
+        const score = document.createElement(`td`);
+        name.textContent = player.name;
+        score.textContent = player.score;
+        nameRow.appendChild(name);
+        scoreRow.appendChild(score);
+      });
+
+      const currentLead = game.determineLead();
+      const lead = this.container.childNodes[1].childNodes[1];
+      lead.textContent = currentLead;
+
+      const remainingTiles = game.getNumberOfTilesInBag();
+      const bag = this.container.childNodes[2].childNodes[1];
+      bag.textContent = remainingTiles;
+    });
   }
 
 }

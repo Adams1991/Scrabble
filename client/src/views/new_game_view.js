@@ -42,7 +42,6 @@ class NewGameView {
       submitButton.value = `Start Game`;
       form.appendChild(submitButton);
       this.container.appendChild(form);
-
       form.addEventListener(`submit`, (evt) => {
         evt.preventDefault();
         const playerDetails = evt.target.playerInput;

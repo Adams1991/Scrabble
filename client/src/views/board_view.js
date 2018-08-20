@@ -23,7 +23,7 @@ class BoardView {
 module.exports = BoardView;
 
 function createTable(table, squares) {
-  this.table.innerHTML = ``;
+  table.innerHTML = ``;
   squares.reduce(addRow, table);
 };
 
