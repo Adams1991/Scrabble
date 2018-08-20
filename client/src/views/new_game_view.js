@@ -46,7 +46,7 @@ class NewGameView {
           players.push(player);
         });
         const game = new Game(players);
-        console.dir(game);
+        PubSub.publish(`Submission:new-game`, game);
       });
     });
 

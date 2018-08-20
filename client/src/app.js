@@ -4,7 +4,8 @@ const TransitionView = require('./views/transition_view.js');
 const PlayerView = require('./views/player_view.js');
 const ScoreView = require('./views/score_view.js');
 const NewGameView = require('./views/new_game_view.js');
-const Player = require('./views/new_game_view.js');
+const Submission = require('./models/submission.js');
+
 
 // const Player = require('../../client/src/models/player.js');
 // const Game = require('../../client/src/models/game.js');
@@ -21,6 +22,10 @@ document.addEventListener('DOMContentLoaded', () => {
   const body = document.querySelector('body');
   const newGameView = new NewGameView(newGameButton, body);
   newGameView.bindEvents();
+
+  const url = `http://localhost:3000/api/games`
+  const submission = new Submission(url);
+  submission.bindEvents();
 
   // const playerContainer = document.querySelector(`#player-wrapper`)
   // const playerView = new PlayerView(playerContainer)

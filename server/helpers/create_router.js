@@ -31,15 +31,8 @@ const createRouter = function (collection) {
   router.post('/', (req, res) => {
     const newData = req.body;
     collection.insertOne(newData)
-    .then(() => {
-      collection
-      .find()
-      .toArray()
-      .then((docs) => res.json(docs));
-    })
-    .catch((err) => {
-      console.error(err);
-    });
+      .then(() => res.send(`save complete`))
+      .catch((err) => console.error(err));
   });
 
   // DESTROY
