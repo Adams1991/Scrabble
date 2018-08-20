@@ -1,5 +1,6 @@
 const Rack = require("./rack.js");
 const Bag = require("./bag.js");
+const PubSub = require('../helpers/pub_sub.js');
 
 class Player {
   constructor(name) {

@@ -4,6 +4,7 @@ const TransitionView = require('./views/transition_view.js');
 const PlayerView = require('./views/player_view.js');
 const ScoreView = require('./views/score_view.js');
 const NewGameView = require('./views/new_game_view.js');
+const Player = require('./views/new_game_view.js');
 
 // const Player = require('../../client/src/models/player.js');
 // const Game = require('../../client/src/models/game.js');

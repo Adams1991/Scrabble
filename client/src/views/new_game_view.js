@@ -1,4 +1,6 @@
-
+const PubSub = require('../helpers/pub_sub.js');
+const Player = require('../models/player.js');
+const Game = require('../models/game.js');
 
 class NewGameView {
   constructor(button, container) {
@@ -39,8 +41,12 @@ class NewGameView {
         evt.preventDefault();
         const playerDetails = evt.target.playerInput;
         const players = [];
-        playerDetails.forEach(player => players.push(player.value));
-        console.dir(players);
+        playerDetails.forEach(playerName => {
+          const player = new Player(playerName.value);
+          players.push(player);
+        });
+        const game = new Game(players);
+        console.dir(game);
       });
     });
 
