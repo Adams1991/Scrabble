@@ -1,6 +1,7 @@
 const PubSub = require('../helpers/pub_sub.js');
 const Player = require('../models/player.js');
 const Game = require('../models/game.js');
+const Turn = require('../models/turn.js');
 const BoardView = require('./board_view.js');
 const TransitionView = require('./transition_view.js');
 const PlayerView = require('./player_view.js');
@@ -90,6 +91,9 @@ class NewGameView {
         // makes score views
         const scoreView = new ScoreView(scoreWrapper);
         scoreView.bindEvents();
+
+        const turn = new Turn();
+        turn.bindEvents();
 
         // makes transition view
         const transitionView = new TransitionView(playerWrapper)

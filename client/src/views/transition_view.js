@@ -18,7 +18,7 @@ class TransitionView {
       button.textContent = 'Start turn';
       this.container.appendChild(button);
       button.addEventListener('click', () => {
-        PubSub.publish('Turn:player-turn', this.game);
+        PubSub.publish('Turn:start-player-turn', this.game);
       });
     });
   };
