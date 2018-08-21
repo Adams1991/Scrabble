@@ -39,6 +39,12 @@ class Submission {
       });
       gameSubmission.game.players[0].getTilesFromBag(tilesNeeded, gameSubmission.game.bag);
 
+      //update score
+      const score = gameSubmission.activeWords.reduce((score, word) => {
+        return score + word.getWordScore();
+      }, 0);
+      gameSubmission.game.players[0].score += score;
+
     });
 
   };
