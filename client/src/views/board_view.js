@@ -29,7 +29,9 @@ class BoardView {
       const square = document.getElementById(coord);
       const tile = document.createElement(`div`);
       tile.classList.add(`tile`);
+      tile.classList.add(`active-tile`);
       tile.textContent = placedTile.letter;
+      tile.value = placedTile.value;
       square.appendChild(tile);
     })
 
@@ -54,6 +56,7 @@ function addRow(table, row, y) {
       const tile = document.createElement(`div`);
       tile.classList.add(`tile`);
       tile.textContent = row[x].tile.letter;
+      tile.value = row[x].tile.value;
       cell.appendChild(tile);
     }
     htmlRow.appendChild(cell);
