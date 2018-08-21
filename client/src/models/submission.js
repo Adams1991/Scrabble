@@ -2,7 +2,7 @@ const PubSub = require('../helpers/pub_sub.js');
 const Request = require('../helpers/request.js');
 const Tile = require(`./tile.js`);
 const Game = require(`./game.js`);
-const ApiKey= require('../../api_crypto_key.js');
+const ApiKey= require('../../../api_key.js');
 
 class Submission {
   constructor(url) {
@@ -17,6 +17,7 @@ class Submission {
 
     PubSub.subscribe(`Submission:game-submitted`, (evt) => {
       const gameSubmission = evt.detail;
+      const activeWords = gameSubmission.activeWords;
 
       //Add tiles to board model
       const activeTiles = document.querySelectorAll('div.active-tile');
