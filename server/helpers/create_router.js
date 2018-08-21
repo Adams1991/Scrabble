@@ -31,8 +31,12 @@ const createRouter = function (collection) {
   router.post('/', (req, res) => {
     const newData = req.body;
     collection.insertOne(newData)
-      .then(() => res.send(`save complete`))
-      .catch((err) => console.error(err));
+    .then(() => {
+      return collection.find().toArray()
+    })
+    .then((docs) => {
+      res.json(docs[docs.length -1]);
+    });
   });
 
   // DESTROY
@@ -64,7 +68,7 @@ const createRouter = function (collection) {
       return collection.find().toArray()
     })
     .then((docs) => {
-      res.json(docs);
+      res.json(docs[docs.length -1]);
     });
   });
 

@@ -16,10 +16,25 @@ class BoardView {
       PubSub.publish(`Turn:coord-of-last-square-clicked`, squareCoords);
       console.log(squareCoords);
     });
+
     PubSub.subscribe('BoardView:update-board', (evt) => {
       const squares = evt.detail;
       createTable(this.table, squares);
     });
+
+    PubSub.subscribe('BoardView:tile-on-board', (evt) => {
+      const tileOnBoard = evt.detail;
+      const coord = `${tileOnBoard.coord.x}:${tileOnBoard.coord.y}`;
+      const placedTile = tileOnBoard.tile;
+      const square = document.getElementById(coord);
+      const tile = document.createElement(`div`);
+      tile.classList.add(`tile`);
+      tile.classList.add(`active-tile`);
+      tile.textContent = placedTile.letter;
+      tile.value = placedTile.value;
+      square.appendChild(tile);
+    })
+
   };
   
 };
@@ -37,8 +52,20 @@ function addRow(table, row, y) {
     const cell = document.createElement(`td`);
     cell.id = `${x}:${y}`;
     cell.classList.add('square');
+    if (row[x].tile !== null){
+      const tile = document.createElement(`div`);
+      tile.classList.add(`tile`);
+      tile.textContent = row[x].tile.letter;
+      tile.value = row[x].tile.value;
+      cell.appendChild(tile);
+    }
     htmlRow.appendChild(cell);
   };
   table.appendChild(htmlRow);
   return table;
 };
+
+function addTileToBoard(board, tileOnBoard) {
+
+
+}

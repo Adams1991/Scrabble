@@ -189,3 +189,7 @@ div#score-wrapper {
 div#lead-view, div#bag, table {
   margin: 1rem;
 }
+
+.on-board, .hide {
+  visibility: hidden;
+}

@@ -4,6 +4,7 @@ const PubSub = require('../helpers/pub_sub.js');
 class PlayerView {
   constructor(container) {
     this.container = container;
+    this.gameSubmission = null;
   }
 
   bindEvents(){
@@ -16,12 +17,9 @@ class PlayerView {
       // setups rack
       const rackContainer = document.createElement('div');
       rackContainer.id = "rack-container"
-      console.log(rackContainer);
       this.container.appendChild(rackContainer)
       const rackView = new RackView(rackContainer);
       rackView.bindEvents(player.rack);
-
-
 
       // setups swapButton
       const swapButton = document.createElement('button');
@@ -39,10 +37,24 @@ class PlayerView {
       // setups
       const endGameButton = document.createElement('button');
       endGameButton.id = "end-game-button"
-      endGameButton.textContent = "End Game"
+      endGameButton.textContent = "Forfeit"
       this.container.appendChild(endGameButton)
-    });
 
+      const endTurnButton = document.createElement('button');
+      endTurnButton.id = "end-turn-button"
+      endTurnButton.textContent = "End Turn"
+      endTurnButton.classList.add(`hide`);
+      this.container.appendChild(endTurnButton);
+      endTurnButton.addEventListener(`click`, () => {
+        PubSub.publish(`Submission:game-submitted`, this.gameSubmission);
+      });
+
+      PubSub.subscribe(`PlayerView:game-ready`, (evt) => {
+        this.gameSubmission = evt.detail;
+        endTurnButton.classList.remove(`hide`);
+      });
+
+    });
 
 
   };

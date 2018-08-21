@@ -12,15 +12,28 @@ class RackView {
     createRack(this.container, rack);
     this.container.addEventListener('click', (evt) => {
       const tileIndex = evt.target.id;
+      this.container.childNodes.forEach((node, index) => {
+        if(index == tileIndex){
+          node.classList.add(`active`);
+        }else {
+          node.classList.remove(`active`);
+        };
+      });
       PubSub.publish(`Turn:index-last-clicked-tile`, tileIndex);
-      console.log(tileIndex);
     })
 
-
+    PubSub.subscribe('RackView:tile-on-board', () => {
+      this.container.childNodes.forEach(node => {
+        // console.dir(node.classList.contains(`active`));
+        if(node.classList.contains(`active`)){
+          node.classList.remove(`active`);
+          node.classList.add(`on-board`);
+        };
+      });
+    });
   };
 
-
-}
+};
 
 module.exports = RackView;
 
@@ -34,5 +47,8 @@ function createRack(container, rack) {
     container.appendChild(tileSlot);
   })
   return container;
+}
+
+function updateRack(container) {
 
 }

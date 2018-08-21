@@ -8,6 +8,7 @@ class Game {
     this.players = players;
     this.board = new Board();
     this.bag = new Bag();
+    this._id = null;
     giveStartingTiles(players, this.bag);
   };
 
