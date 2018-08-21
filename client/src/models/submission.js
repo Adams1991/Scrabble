@@ -4,17 +4,15 @@ const Request = require('../helpers/request.js');
 class Submission {
   constructor(url) {
     this.request = new Request(url);
-  }
+  };
 
   bindEvents() {
     PubSub.subscribe(`Submission:new-game`, (evt) => {
       const game = evt.detail;
       saveNewGame(game, this.request);
-    })
-  }
-
-
-}
+    });
+  };
+};
 
 module.exports = Submission;
 
@@ -26,4 +24,4 @@ function saveNewGame(game, request) {
   .catch((err) => {
     console.error(err);
   });
-}
+};
