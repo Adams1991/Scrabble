@@ -142,8 +142,8 @@ class Turn {
       const activeWord = new ActiveWord(firstPlacedTile, secondPlacedTile);
       if(activeWord.direction && activeWord.tiles){
         const direction = otherDirection(Object.keys(activeWord.direction)[0]);
-        const beginningCoord = activeWord.tiles[0].coord;
-        const endCoord = activeWord.tiles[activeWord.tiles.length-1].coord;
+        let beginningCoord = activeWord.tiles[0].coord;
+        let endCoord = activeWord.tiles[activeWord.tiles.length-1].coord;
         let adjacentTile = this.game.board.getTileBefore(direction, beginningCoord);
         while (adjacentTile !== null) {
           activeWord.addTile(adjacentTile);
