@@ -21,10 +21,14 @@ class Turn {
       this.player = this.game.players[0]
       PubSub.publish(`PlayerView:display-view`, this.player);
 
+
       PubSub.subscribe(`Turn:index-last-clicked-tile`, (evt) => {
         const rackIndex = evt.detail;
         const activeTile = this.player.getTileInRackByIndex(rackIndex);
         this.manipulatePrimaryWord(`Tile`, activeTile)
+        // this.player.removeTileFromRackByIndex(evt.Index);
+        // PubSub.publish(`PlayerView:display-view`, this.player)
+
       });
 
 
@@ -42,11 +46,15 @@ class Turn {
   manipulatePrimaryWord(interactedElement, activeDescriptor){
     if (this.primaryActiveWord === null){
       if (this.tile !== null && this.coord !== null) {
+        this.game.board.addTileByCoord(this.tile, this.coord);
+        PubSub.publish('BoardView:update-board', this.game.board.squares);
         this[`second${interactedElement}`] = activeDescriptor;
         console.dir(this.secondCoord);
         console.dir(this.secondTile);
         this.primaryActiveWord = createActiveWord(this.tile, this.coord, this.secondTile, this.secondCoord)
         if (this.primaryActiveWord !== null){
+          this.game.board.addTileByCoord(this.secondTile, this.secondCoord);
+          PubSub.publish('BoardView:update-board', this.game.board.squares);
           this.tile = null;
           this.secondTile = null;
           this.coord = null;
@@ -54,12 +62,18 @@ class Turn {
         this.secondCoord = null;
       }else {
         this[interactedElement.toLowerCase()] = activeDescriptor;
+        if (this.tile !== null && this.coord !== null){
+          this.game.board.addTileByCoord(this.tile, this.coord);
+          PubSub.publish('BoardView:update-board', this.game.board.squares);
+        };
       }
     }else {
       this[interactedElement.toLowerCase()] = activeDescriptor;
       if(this.tile !== null && this.coord !== null){
         const placedTile = {tile: this.tile, coord: this.coord};
         if (this.primaryActiveWord.addTile(placedTile)){
+          this.game.board.addTileByCoord(this.tile, this.coord);
+          PubSub.publish('BoardView:update-board', this.game.board.squares);
           this.tile = null;
         };
         this.coord = null;

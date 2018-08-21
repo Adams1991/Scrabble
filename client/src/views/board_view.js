@@ -37,6 +37,9 @@ function addRow(table, row, y) {
     const cell = document.createElement(`td`);
     cell.id = `${x}:${y}`;
     cell.classList.add('square');
+    if (row[x].tile !== null){
+      cell.textContent = row[x].tile.letter;
+    }
     htmlRow.appendChild(cell);
   };
   table.appendChild(htmlRow);

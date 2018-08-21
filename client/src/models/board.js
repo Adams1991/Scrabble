@@ -96,7 +96,7 @@ function createSquares() {
     // need to change logic for mulitpliers
     const correctColumnArray = startColumnArray.map(square => Object.assign(new Square, square));
     startColumnArray.reverse()
-    correctColumnArray.push(mirrorLineArray[i]);
+    correctColumnArray.push(Object.assign(new Square, mirrorLineArray[i]));
     const columnArray = correctColumnArray.concat(startColumnArray);
 
     startRowArray.push(columnArray);
