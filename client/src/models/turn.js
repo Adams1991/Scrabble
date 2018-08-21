@@ -67,11 +67,18 @@ class Turn {
   manipulatePrimaryWord(interactedElement, activeDescriptor){
     if (this.primaryActiveWord === null){
       if (this.tile !== null && this.coord !== null) {
-        this.primaryActiveWord = createActiveWord(this.tile, this.coord, this.secondTile, this.secondCoord)
+        this.primaryActiveWord = createActiveWord(this.tile, this.coord, this.secondTile, this.secondCoord, this.game.board)
         if (this.primaryActiveWord !== null){
+          console.dir(this.primaryActiveWord);
           const tileOnBoard = {tile: this.secondTile, coord: this.secondCoord};
           PubSub.publish('BoardView:tile-on-board', tileOnBoard);
           PubSub.publish('RackView:tile-on-board', null)
+          const adjacentTiles = this.game.board.getAdjacentTiles(this.secondCoord);
+          adjacentTiles.forEach((adjacentTile) => {
+            const secondaryActiveWord = createActiveWord(this.secondTile, this.secondCoord, adjacentTile.tile, adjacentTile.coord, this.game.board);
+            this.secondaryActiveWords.push(secondaryActiveWord);
+            console.log(`second`, this.secondaryActiveWords);
+          });
           this.tile = null;
           this.secondTile = null;
           this.coord = null;
@@ -88,7 +95,7 @@ class Turn {
           PubSub.publish('RackView:tile-on-board', null);
           const adjacentTiles = this.game.board.getAdjacentTiles(this.coord);
           adjacentTiles.forEach((adjacentTile) => {
-            const secondaryActiveWord = createActiveWord(this.tile, this.coord, adjacentTile.tile, adjacentTile.coord);
+            const secondaryActiveWord = createActiveWord(this.tile, this.coord, adjacentTile.tile, adjacentTile.coord, this.game.board);
             this.secondaryActiveWords.push(secondaryActiveWord);
             console.log(`other`, this.secondaryActiveWords);
           });
@@ -103,14 +110,6 @@ class Turn {
     if (this.primaryActiveWord === null){
       if (this.tile !== null && this.coord !== null) {
         this[`second${interactedElement}`] = activeDescriptor;
-        if (this.secondTile !== null && this.secondCoord !== null){
-          const adjacentTiles = this.game.board.getAdjacentTiles(this.secondCoord);
-          adjacentTiles.forEach((adjacentTile) => {
-            const secondaryActiveWord = createActiveWord(this.secondTile, this.secondCoord, adjacentTile.tile, adjacentTile.coord);
-            this.secondaryActiveWords.push(secondaryActiveWord);
-            console.log(`second`, this.secondaryActiveWords);
-          });
-        }
       }else {
         this[interactedElement.toLowerCase()] = activeDescriptor;
         if (this.tile !== null && this.coord !== null){
@@ -119,7 +118,7 @@ class Turn {
           PubSub.publish('RackView:tile-on-board', null);
           const adjacentTiles = this.game.board.getAdjacentTiles(this.coord);
           adjacentTiles.forEach((adjacentTile) => {
-            const secondaryActiveWord = createActiveWord(this.tile, this.coord, adjacentTile.tile, adjacentTile.coord);
+            const secondaryActiveWord = createActiveWord(this.tile, this.coord, adjacentTile.tile, adjacentTile.coord, this.game.board);
             this.secondaryActiveWords.push(secondaryActiveWord);
             console.log(`first`, this.secondaryActiveWords);
           });
@@ -132,14 +131,45 @@ class Turn {
 
 module.exports = Turn;
 
-function createActiveWord(firstTile, firstCoord, secondTile, secondCoord) {
+function createActiveWord(firstTile, firstCoord, secondTile, secondCoord, board) {
   const firstPlacedTile = {tile: firstTile, coord: firstCoord};
   if(secondTile !== null && secondCoord !== null){
     const secondPlacedTile = {tile: secondTile, coord: secondCoord};
     const activeWord = new ActiveWord(firstPlacedTile, secondPlacedTile);
     if(activeWord.direction && activeWord.tiles){
+      const direction = otherDirection(Object.keys(activeWord.direction)[0]);
+      let beginningCoord = activeWord.tiles[0].coord;
+      let endCoord = activeWord.tiles[activeWord.tiles.length-1].coord;
+
+      let adjacentTile = board.getTileBefore(direction, beginningCoord);
+      console.dir(adjacentTile);
+      console.dir(beginningCoord);
+      while (adjacentTile !== null) {
+        activeWord.addTile(adjacentTile);
+        beginningCoord = adjacentTile.coord;
+        adjacentTile = board.getTileBefore(direction, beginningCoord);
+      }
+
+      adjacentTile = board.getTileAfter(direction, endCoord);
+      console.dir(board.getTileAfter('y', endCoord));
+      console.dir(direction);
+      console.dir(endCoord);
+      while (adjacentTile !== null) {
+        activeWord.addTile(adjacentTile);
+        endCoord = adjacentTile.coord;
+        adjacentTile = board.getTileBefore(direction, endCoord);
+      }
+
       return activeWord;
     }
   }
   return null;
+}
+
+function otherDirection(directionKey) {
+  if(directionKey === "x"){
+    return "y";
+  }else{
+    return "x";
+  }
 }
