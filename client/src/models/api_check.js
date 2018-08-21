@@ -24,6 +24,6 @@ function checkAPIforword(word) {
         if(data.results.length === 1){
           result = true;
         }
+        PubSub.publish('Submission: validation-results', result)
       })
-    PubSub.publish('Submission: validation-results', result)
 }

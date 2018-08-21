@@ -21,7 +21,7 @@ class Submission {
       const activeWordResults = [];
 
       activeWords.forEach((word) => {
-        PubSub.publish('ApiCheck: word-to-be-checked', word)
+        PubSub.publish('ApiCheck: word-to-be-checked', word.getWord())
       });
 
       PubSub.subscribe('Submission: validation-results', (evt) => {
@@ -29,7 +29,7 @@ class Submission {
         activeWordResults.push(result);
       })
 
-      
+
 
       //Add tiles to board model
       const activeTiles = document.querySelectorAll('div.active-tile');
