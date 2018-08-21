@@ -25,8 +25,8 @@ class Turn {
       PubSub.subscribe(`Turn:index-last-clicked-tile`, (evt) => {
         const rackIndex = evt.detail;
         const activeTile = this.player.getTileInRackByIndex(rackIndex);
+        PubSub.publish(`RackView:active-tile`, rackIndex);
         this.manipulatePrimaryWord(`Tile`, activeTile)
-        // this.player.removeTileFromRackByIndex(evt.Index);
         // PubSub.publish(`PlayerView:display-view`, this.player)
 
       });
