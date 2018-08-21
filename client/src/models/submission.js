@@ -18,8 +18,9 @@ class Submission {
     PubSub.subscribe(`Submission:game-submitted`, (evt) => {
       const gameSubmission = evt.detail;
       const activeWords = gameSubmission.activeWords;
-      const testWord = "gammon"
-      const log = checkAPIforword(testWord);
+      activeWords.forEach((word) => {
+        checkAPIforword(word);
+      })
 
 
 
@@ -85,10 +86,14 @@ function saveCurrentGame(game, request) {
 }
 
 function checkAPIforword(word) {
+    let result = false;
     const url = `http://localhost:3000/validate/${word}`
     const request = new Request(url);
     request.get()
       .then((data) => {
-        console.log(data);
+        if(data.results.length === 1){
+          result = true;
+        }
+        return result
       })
 }
