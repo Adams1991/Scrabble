@@ -28,6 +28,7 @@ class ScoreView {
 
       const currentLead = game.determineLead();
       const lead = this.container.childNodes[1].childNodes[1];
+      console.dir(this.container.childNodes);
       lead.textContent = currentLead;
 
       const remainingTiles = game.getNumberOfTilesInBag();
@@ -41,6 +42,7 @@ class ScoreView {
 module.exports = ScoreView;
 
 function createScoreTable(container) {
+
   const table = document.createElement("table");
   const nameRow = document.createElement("tr");
   nameRow.id = "name-row";
@@ -48,32 +50,29 @@ function createScoreTable(container) {
   scoreRow.id = "score-row";
   table.appendChild(nameRow);
   table.appendChild(scoreRow);
-  container.appendChild(table);
-
 
   const lead = document.createElement("div")
   lead.id = "lead-view"
-  const leadLabel = document.createElement("label")
-  leadLabel.textContent = "Lead : "
+  const leadLabel = document.createElement("p")
+  leadLabel.textContent = "Lead"
   leadLabel.htmlFor = "leadMargin"
   const leadScore = document.createElement("p")
   leadScore.id = "leadMargin"
   lead.appendChild(leadLabel);
   lead.appendChild(leadScore);
-  container.appendChild(lead);
-
-
 
   const bag = document.createElement("div")
   bag.id = "bag"
-  const bagLabel = document.createElement("label")
-  bagLabel.textContent = "Tiles Remaining : "
+  const bagLabel = document.createElement("p")
+  bagLabel.textContent = "Tiles"
   bagLabel.htmlFor = "remainingTiles"
   const bagScore = document.createElement("p")
   bagScore.id = "remainingTiles"
   bag.appendChild(bagLabel);
   bag.appendChild(bagScore);
+
+  container.appendChild(table);
+  container.appendChild(lead);
   container.appendChild(bag);
 
-
-}
+};
