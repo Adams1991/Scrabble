@@ -21,7 +21,7 @@ class BoardView {
       createTable(this.table, squares);
     });
   };
-
+  
 };
 
 module.exports = BoardView;
