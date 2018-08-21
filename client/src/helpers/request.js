@@ -2,8 +2,10 @@ const Request = function (url) {
   this.url = url;
 };
 
-Request.prototype.get = function () {
-  return fetch(this.url)
+Request.prototype.get = function (headers) {
+  return fetch(this.url, {
+    headers: headers
+  })
     .then((response) => response.json());
 };
 

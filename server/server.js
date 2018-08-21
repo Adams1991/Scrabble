@@ -1,8 +1,9 @@
 const path = require('path');
-
+const fetch = require('node-fetch');
 const express = require('express');
 const app = express();
 const bodyParser = require('body-parser');
+const ApiKey = require('../api_key.js');
 
 app.use(express.static(path.join(__dirname, '..', 'client', 'public')));
 app.use(bodyParser.json());
@@ -20,11 +21,21 @@ MongoClient.connect('mongodb://localhost:27017')
     console.error(err);
   });
 
-// // Leaving for later in case needed for start new game screen
-// app.get('/new-game', (req, res) => {
-//   res.sendFile('show.html');
-//
-// });
+  app.get('/validate/:word', (req, res) => {
+    const url = 	`https://od-api.oxforddictionaries.com:443/api/v1/entries/en/${req.params.word}`
+    const api = new ApiKey();
+
+    fetch(url , {headers: {
+     "Accept": "application/json",
+     "app_id": api.apiID,
+     "app_key": api.apiKey
+      }})
+       .then((res) => res.json())
+       .then((data) => res.json(data))
+       .catch((err) => {
+         console.error(err);
+       });
+  });
 
 app.listen(3000, function() {
   console.log(`Scrabble server running on port ${this.address().port}`);
