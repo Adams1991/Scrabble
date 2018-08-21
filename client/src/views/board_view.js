@@ -16,10 +16,16 @@ class BoardView {
       PubSub.publish(`Turn:coord-of-last-square-clicked`, squareCoords);
       console.log(squareCoords);
     });
+
     PubSub.subscribe('BoardView:update-board', (evt) => {
       const squares = evt.detail;
       createTable(this.table, squares);
     });
+
+    PubSub.subscribe('BoardView:tile-on-board', (evt) => {
+      const tileOnBoard = evt.detail;
+    })
+
   };
 
 };
