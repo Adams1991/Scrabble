@@ -35,6 +35,7 @@ class FormView {
       const submitButton = document.createElement(`input`);
       submitButton.type = `submit`;
       submitButton.value = `Start Game`;
+      submitButton.classList.add(`start-game`);
       form.appendChild(submitButton);
       this.container.appendChild(form);
 

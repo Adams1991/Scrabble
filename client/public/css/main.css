@@ -5,12 +5,12 @@
   background-color: green;
 }
 
-.tileSlot {
+/* .tileSlot {
   height: 50px;
   width: 50px;
   border: 1px solid black;
   background-color: red;
-}
+} */
 
 body {
   background-color: black;
@@ -97,6 +97,7 @@ button {
   border-left: 0;
   border-radius: 0.2rem;
   padding: 0.5rem;
+  margin: 0.5rem;
 }
 
 button#new-game {
@@ -108,7 +109,7 @@ button#new-game {
   background-color: black;
 } */
 
-.tile {
+.tile, .tileSlot {
   background-color: orange;
   height: 2.3rem;
   width: 2.3rem;
@@ -123,9 +124,24 @@ button#new-game {
 form, input, submit {
   background-color: black;
   color: green;
-  font-size: 1rem;
+  font-size: 1.2rem;
   margin: 0.5rem;
   padding: 0.5rem;
+}
+
+input {
+  background-color: white;
+  color: black;
+}
+
+input.start-game {
+  background-color: green;
+  border-radius: 0.2rem;
+  border: 0;
+  border-bottom: 2px solid darkslategrey;
+  border-right: 2px solid darkslategrey;
+  border-top: 0;
+  border-left: 0;
 }
 
 li {
