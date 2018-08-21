@@ -15,8 +15,9 @@ class Submission {
 
     PubSub.subscribe(`Submission:game-submitted`, (evt) => {
       const gameSubmission = evt.detail;
+
+      //Add tiles to board model
       const activeTiles = document.querySelectorAll('div.active-tile');
-      console.dir(activeTiles);
       activeTiles.forEach(activeTile => {
         const coordArray = activeTile.parentNode.id.split(`:`);
         const tile = new Tile(activeTile.textContent, activeTile.value);
@@ -26,7 +27,17 @@ class Submission {
         };
         gameSubmission.game.board.addTileByCoord(tile, coord);
       });
-      console.dir(gameSubmission.game.board);
+
+      //update rack
+      const htmlRack = document.querySelector(`div#rack-container`);
+      let tilesNeeded = 0;
+      htmlRack.childNodes.forEach((node, index) => {
+        if(node.classList.contains(`on-board`)){
+          gameSubmission.game.players[0].rack.removeTileByIndex(index);
+          tilesNeeded += 1;
+        }
+      });
+      gameSubmission.game.players[0].getTilesFromBag(tilesNeeded, gameSubmission.game.bag);
 
     });
 
