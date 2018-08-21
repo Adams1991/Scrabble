@@ -36,7 +36,7 @@ class BoardView {
     })
 
   };
-  
+
 };
 
 module.exports = BoardView;
@@ -50,7 +50,7 @@ function addRow(table, row, y) {
   const htmlRow = document.createElement(`tr`);
   for (var x = 0; x < row.length; x++) {
     const cell = document.createElement(`td`);
-    cell.id = `${x}:${y}`;
+    cell.id = `s${x}:${y}`;
     cell.classList.add('square');
     if (row[x].tile !== null){
       const tile = document.createElement(`div`);

@@ -31,7 +31,7 @@ td {
  background-color: green;
 }
 
-td#0 {
+#s0\:0, #s0\:7, #s0\:14, #s7\:0, #s7\:14, #s14\:0, #s14\:7, #s14\:14 {
   background-color: red;
 }
 
