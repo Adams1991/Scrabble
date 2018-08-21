@@ -1,6 +1,7 @@
 const PubSub = require('../helpers/pub_sub.js');
 const Request = require('../helpers/request.js');
 const Tile = require(`./tile.js`);
+const Game = require(`./game.js`);
 
 class Submission {
   constructor(url) {
@@ -40,12 +41,11 @@ class Submission {
       gameSubmission.game.players[0].getTilesFromBag(tilesNeeded, gameSubmission.game.bag);
 
       //update score
-      console.dir(gameSubmission.activeWords);
       const score = gameSubmission.activeWords.reduce((score, word) => {
         return score + word.getWordScore();
       }, 0);
       gameSubmission.game.players[0].score += score;
-      console.log(gameSubmission.game.players[0].score);
+      saveCurrentGame(gameSubmission.game, this.request)
     });
 
   };
@@ -55,10 +55,23 @@ module.exports = Submission;
 
 function saveNewGame(game, request) {
   request.post(game)
-  .then(() => {
+  .then((savedGame) => {
+    game._id = savedGame._id;
     PubSub.publish(`NewGameView:create-game-view`, game);
   })
   .catch((err) => {
     console.error(err);
   });
 };
+
+
+
+function saveCurrentGame(game, request) {
+  request.update(game._id, game)
+  .then((savedGame) => {
+    PubSub.publish(`TransitionView:current-game`, game);
+  })
+  .catch((err) => {
+    console.error(err);
+  });
+}

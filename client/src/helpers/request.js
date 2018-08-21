@@ -13,7 +13,7 @@ Request.prototype.post = function (payload) {
     body: JSON.stringify(payload),
     headers: { 'Content-Type': 'application/json' }
   })
-    .then((response) => response);
+    .then((response) => response.json());
 };
 
 Request.prototype.delete = function (id) {
@@ -22,5 +22,14 @@ Request.prototype.delete = function (id) {
   })
     .then((response) => response.json());
 };
+
+Request.prototype.update = function (id, payload) {
+  return fetch(`${this.url}/${id}`, {
+    method: 'PUT',
+    body: JSON.stringify(payload),
+    headers: { 'Content-Type': 'application/json' }
+  })
+  .then((response) => response);
+}
 
 module.exports = Request;

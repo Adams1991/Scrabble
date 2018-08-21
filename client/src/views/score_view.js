@@ -15,6 +15,8 @@ class ScoreView {
       const nameRow = table.childNodes[0];
       const scoreRow = table.childNodes[1];
 
+      nameRow.innerHTML = "";
+      scoreRow.innerHTML = "";
       players.forEach(player => {
         const name = document.createElement(`th`);
         const score = document.createElement(`td`);
