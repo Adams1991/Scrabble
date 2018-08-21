@@ -158,6 +158,6 @@ ol {
   margin: 0;
 }
 
-.on-board {
+.on-board, .hide {
   visibility: hidden;
 }

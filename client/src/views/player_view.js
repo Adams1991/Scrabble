@@ -39,17 +39,21 @@ class PlayerView {
       endGameButton.id = "end-game-button"
       endGameButton.textContent = "Forfeit"
       this.container.appendChild(endGameButton)
-    });
 
-    PubSub.subscribe(`PlayerView:game-ready`, (evt) => {
-      this.gameSubmission = evt.detail;
       const endTurnButton = document.createElement('button');
       endTurnButton.id = "end-turn-button"
       endTurnButton.textContent = "End Turn"
+      endTurnButton.classList.add(`hide`);
       this.container.appendChild(endTurnButton);
       endTurnButton.addEventListener(`click`, () => {
         PubSub.publish(`Submission:game-submitted`, this.gameSubmission);
       });
+
+      PubSub.subscribe(`PlayerView:game-ready`, (evt) => {
+        this.gameSubmission = evt.detail;
+        endTurnButton.classList.remove(`hide`);
+      });
+
     });
 
 
