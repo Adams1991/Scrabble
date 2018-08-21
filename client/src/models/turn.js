@@ -65,6 +65,7 @@ class Turn {
         adjacentTiles.forEach((adjacentTile) => {
           const secondaryActiveWord = this.createActiveWord(this.tile, this.coord, adjacentTile.tile, adjacentTile.coord);
           this.secondaryActiveWords.push(secondaryActiveWord);
+          console.log(this.secondaryActiveWords);
         });
       };
     };
@@ -83,6 +84,7 @@ class Turn {
         this.secondTile = null;
         this.coord = null;
         this.gameReady();
+        console.log(this.primaryActiveWord);
       }
       this.secondCoord = null;
     };
@@ -96,6 +98,7 @@ class Turn {
         this.putTileOnBoard(this.tile, this.coord);
         this.createSecondaryWords(this.tile, this.coord);
         this.tile = null;
+        console.log(this.primaryActiveWord);
       };
       this.coord = null;
     };
@@ -116,6 +119,7 @@ class Turn {
     });
     if(removeIndex !== undefined){
       this.secondaryActiveWords.splice(removeIndex, 1);
+      console.log(this.secondaryActiveWords);
     }
   };
 
@@ -131,6 +135,7 @@ class Turn {
       if(!this.primaryActiveWord.containsTile(adjacentTile)){
         const secondaryActiveWord = this.createActiveWord(tile, coord, adjacentTile.tile, adjacentTile.coord);
         this.secondaryActiveWords.push(secondaryActiveWord);
+        console.log(this.secondaryActiveWords);
       };
     });
   };
@@ -144,6 +149,7 @@ class Turn {
         const direction = otherDirection(Object.keys(activeWord.direction)[0]);
         let beginningCoord = activeWord.tiles[0].coord;
         let endCoord = activeWord.tiles[activeWord.tiles.length-1].coord;
+
         let adjacentTile = this.game.board.getTileBefore(direction, beginningCoord);
         while (adjacentTile !== null) {
           activeWord.addTile(adjacentTile);
