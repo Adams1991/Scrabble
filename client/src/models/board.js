@@ -66,7 +66,7 @@ class Board {
     if(bottomTile !== null){adjacentTiles.push(bottomTile)};
     if(leftTile !== null){adjacentTiles.push(leftTile)};
 
-    if(adjacentTiles.length === 0){return null};
+    // if(adjacentTiles.length === 0){return null};
     return adjacentTiles;
   };
 
