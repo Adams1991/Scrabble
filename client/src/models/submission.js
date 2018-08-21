@@ -18,13 +18,18 @@ class Submission {
     PubSub.subscribe(`Submission:game-submitted`, (evt) => {
       const gameSubmission = evt.detail;
       const activeWords = gameSubmission.activeWords;
+      const activeWordResults = [];
+
       activeWords.forEach((word) => {
-        checkAPIforword(word);
+        PubSub.publish('ApiCheck: word-to-be-checked', word)
+      });
+
+      PubSub.subscribe('Submission: validation-results', (evt) => {
+        const result = evt.details;
+        activeWordResults.push(result);
       })
 
-
-
-
+      
 
       //Add tiles to board model
       const activeTiles = document.querySelectorAll('div.active-tile');
@@ -83,17 +88,4 @@ function saveCurrentGame(game, request) {
   .catch((err) => {
     console.error(err);
   });
-}
-
-function checkAPIforword(word) {
-    let result = false;
-    const url = `http://localhost:3000/validate/${word}`
-    const request = new Request(url);
-    request.get()
-      .then((data) => {
-        if(data.results.length === 1){
-          result = true;
-        }
-        return result
-      })
 }
