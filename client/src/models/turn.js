@@ -35,15 +35,6 @@ class Turn {
         } else {
           this.phaseTwo(`Tile`, activeTile);
         }
-        if (this.primaryActiveWord !== null){
-          const activeWords = this.secondaryActiveWords.map(activeWord => activeWord);
-          activeWords.push(this.primaryActiveWord);
-          const gameSubmission = {
-            game: this.game,
-            activeWords: activeWords
-          };
-          PubSub.publish(`PlayerView:game-ready`, gameSubmission);
-        };
       });
 
 
@@ -57,15 +48,6 @@ class Turn {
           this.phaseOneB(`Coord`, activeCoord)
         }else {
           this.phaseTwo(`Coord`, activeCoord);
-        }
-        if (this.primaryActiveWord !== null){
-          const activeWords = this.secondaryActiveWords.map(activeWord => activeWord);
-          activeWords.push(this.primaryActiveWord);
-          const gameSubmission = {
-            game: this.game,
-            activeWords: activeWords
-          };
-          PubSub.publish(`PlayerView:game-ready`, gameSubmission);
         }
       });
     });
@@ -100,6 +82,7 @@ class Turn {
         this.tile = null;
         this.secondTile = null;
         this.coord = null;
+        this.gameReady();
       }
       this.secondCoord = null;
     };
@@ -178,6 +161,16 @@ class Turn {
     }
     return null;
   }
+
+  gameReady() {
+    const activeWords = this.secondaryActiveWords.map(activeWord => activeWord);
+    activeWords.push(this.primaryActiveWord);
+    const gameSubmission = {
+      game: this.game,
+      activeWords: activeWords
+    };
+    PubSub.publish(`PlayerView:game-ready`, gameSubmission);
+  };
 
 }
 
