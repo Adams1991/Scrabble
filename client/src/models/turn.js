@@ -50,7 +50,7 @@ class Turn {
         console.dir(this.secondTile);
         this.primaryActiveWord = createActiveWord(this.tile, this.coord, this.secondTile, this.secondCoord)
         if (this.primaryActiveWord !== null){
-          const tileOnBoard = {tile: this.tile, coord: this.coord}
+          const tileOnBoard = {tile: this.secondTile, coord: this.secondCoord};
           PubSub.publish('BoardView:tile-on-board', tileOnBoard);
           PubSub.publish('RackView:tile-on-board', null)
           this.tile = null;

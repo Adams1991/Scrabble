@@ -31,11 +31,9 @@ class RackView {
         };
       });
     });
-
   };
 
-
-}
+};
 
 module.exports = RackView;
 

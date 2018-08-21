@@ -24,6 +24,13 @@ class BoardView {
 
     PubSub.subscribe('BoardView:tile-on-board', (evt) => {
       const tileOnBoard = evt.detail;
+      const coord = `${tileOnBoard.coord.x}:${tileOnBoard.coord.y}`;
+      const placedTile = tileOnBoard.tile;
+      const square = document.getElementById(coord);
+      const tile = document.createElement(`div`);
+      tile.classList.add(`tile`);
+      tile.textContent = placedTile.letter;
+      square.appendChild(tile);
     })
 
   };
@@ -44,10 +51,18 @@ function addRow(table, row, y) {
     cell.id = `${x}:${y}`;
     cell.classList.add('square');
     if (row[x].tile !== null){
-      cell.textContent = row[x].tile.letter;
+      const tile = document.createElement(`div`);
+      tile.classList.add(`tile`);
+      tile.textContent = row[x].tile.letter;
+      cell.appendChild(tile);
     }
     htmlRow.appendChild(cell);
   };
   table.appendChild(htmlRow);
   return table;
 };
+
+function addTileToBoard(board, tileOnBoard) {
+
+
+}
