@@ -61,6 +61,9 @@ class Turn {
       if (this.tile !== null && this.coord !== null){
         this.putTileOnBoard(this.tile, this.coord);
         this.createSecondaryWords(this.tile, this.coord);
+        if(this.secondaryActiveWords.length !== 0){
+          this.gameReady();
+        }
         console.log(this.primaryActiveWord);
         console.log(this.secondaryActiveWords);
       };
@@ -72,7 +75,7 @@ class Turn {
       let tempWords = this.createTempWords(this.secondTile, this.secondCoord);
       this.createPrimaryWordFromSecondary();
       if (this.primaryActiveWord === null){
-        this.createPrimaryWordFromTemp(tempWords);
+        tempWords = this.createPrimaryWordFromTemp(tempWords);
       };
       if (this.primaryActiveWord === null){
         this.primaryActiveWord = this.createActiveWord(this.tile, this.coord, this.secondTile, this.secondCoord);
@@ -147,10 +150,11 @@ class Turn {
     });
     if(removeIndex !== undefined){
       tempWords.splice(removeIndex, 1);
-      tempWords.forEach(word => {
-        this.secondaryActiveWords.push(word);
-      });
+      // tempWords.forEach(word => {
+      //   this.secondaryActiveWords.push(word);
+      // });
     }
+    return tempWords;
   };
 
   checkPrimaryActiveWordContainsTemp(tempWords){
@@ -224,7 +228,7 @@ class Turn {
 
   gameReady() {
     const activeWords = this.secondaryActiveWords.map(activeWord => activeWord);
-    activeWords.push(this.primaryActiveWord);
+    if(this.primaryActiveWord !== null){activeWords.push(this.primaryActiveWord)}
     const gameSubmission = {
       game: this.game,
       activeWords: activeWords

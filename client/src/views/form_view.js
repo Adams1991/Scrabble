@@ -24,7 +24,6 @@ class FormView {
         const playerInput = document.createElement(`input`);
         playerInput.type = `text`;
         playerInput.required = `true`;
-        playerInput.value = `Shaun`;
         playerInput.classList.add(`player-input`);
         playerInput.name = `playerInput`;
         player.appendChild(playerInput);

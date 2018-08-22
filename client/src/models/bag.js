@@ -3,7 +3,7 @@ const Tile = require("./tile.js");
 class Bag {
   constructor() {
     this.tiles = [];
-    this.addNewTiles('A', 1, 9);
+    this.addNewTiles('A', 1, 11);
     this.addNewTiles('B', 3, 2);
     this.addNewTiles('C', 3, 2);
     this.addNewTiles('D', 2, 4);
@@ -29,7 +29,7 @@ class Bag {
     this.addNewTiles('X', 8, 1);
     this.addNewTiles('Y', 4, 2);
     this.addNewTiles('Z', 10, 1);
-    this.addNewTiles('', 0, 2);
+    // this.addNewTiles('', 0, 2);
   };
 
   getNumberOfTiles() {

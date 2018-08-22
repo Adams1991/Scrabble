@@ -10,6 +10,7 @@ class ApiCheck {
     PubSub.subscribe('ApiCheck:word-to-be-checked', (evt) => {
       const words = evt.detail;
       const promises = words.map((word) => {
+        console.log(`request`, word.getWord());
         return checkAPIforword(word.getWord());
       })
       Promise.all(promises)
