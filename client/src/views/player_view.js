@@ -22,7 +22,9 @@ class PlayerView {
       rackView.bindEvents(player.rack);
 
       const br1 = document.createElement('br');
+      const br2 = document.createElement('br');
       this.container.appendChild(br1);
+      this.container.appendChild(br2);
 
       const endTurnButton = document.createElement('button');
       endTurnButton.id = "end-turn-button"
@@ -32,9 +34,9 @@ class PlayerView {
       endTurnButton.addEventListener(`click`, () => {
         PubSub.publish(`Submission:game-submitted`, this.gameSubmission);
       });
-      
-      const br2 = document.createElement('br');
-      this.container.appendChild(br2);
+
+      const br3 = document.createElement('br');
+      this.container.appendChild(br3);
 
       // setups swapButton
       const swapButton = document.createElement('button');
