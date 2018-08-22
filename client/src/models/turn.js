@@ -11,7 +11,6 @@ class Turn {
     this.secondCoord = null;
     this.primaryActiveWord = null
     this.secondaryActiveWords = [];
-    this.tempWords = [];
   }
 
   bindEvents() {
@@ -68,21 +67,17 @@ class Turn {
 
   placeSecondTile(interactedElement, activeDescriptor) {
     if (this.secondTile !== null && this.secondCoord !== null){
-      this.createTempWords(this.secondTile, this.secondCoord);
+      const tempWords = this.createTempWords(this.secondTile, this.secondCoord);
       this.createPrimaryWordFromSecondary();
       if (this.primaryActiveWord === null){
-        this.createPrimaryWordFromTemp(this.tempWords);
+        this.createPrimaryWordFromTemp(tempWords);
       };
       if (this.primaryActiveWord === null){
         this.primaryActiveWord = this.createActiveWord(this.tile, this.coord, this.secondTile, this.secondCoord);
       };
       if (this.primaryActiveWord !== null){
         this.putTileOnBoard(this.secondTile, this.secondCoord);
-        this.checkPrimaryActiveWordContainsTemp();
-        this.tempWords.forEach(word => {
-          this.secondaryActiveWords.push(word);
-        });
-        this.tempWords = [];
+        this.checkPrimaryActiveWordContainsTemp(tempWords);
         this.tile = null;
         this.secondTile = null;
         this.coord = null;
@@ -97,9 +92,11 @@ class Turn {
     this[interactedElement.toLowerCase()] = activeDescriptor;
     if(this.tile !== null && this.coord !== null){
       const placedTile = {tile: this.tile, coord: this.coord};
+      const tempWords = this.createTempWords(this.tile, this.coord);
       if (this.primaryActiveWord.addTile(placedTile)){
         this.putTileOnBoard(this.tile, this.coord);
-        // this.createSecondaryWords(this.tile, this.coord);
+        this.crawlExistingWords(this.primaryActiveWord);
+        this.checkPrimaryActiveWordContainsTemp(tempWords);
         this.tile = null;
         console.log(this.primaryActiveWord);
       };
@@ -126,12 +123,12 @@ class Turn {
     }
   };
 
-  createPrimaryWordFromTemp(){
+  createPrimaryWordFromTemp(tempWords){
     const firstPlacedTile = {tile: this.tile, coord: this.coord};
     const secondPlacedTile = {tile: this.secondTile, coord: this.secondCoord};
     const possibleWordDirection = calculateDirection(this.coord, this.secondCoord);
     let removeIndex;
-    this.tempWords.forEach((word, index) => {
+    tempWords.forEach((word, index) => {
       if(word.direction.x === possibleWordDirection.x && word.direction.y === possibleWordDirection.y){
         if(word.addTile(firstPlacedTile)){
           this.primaryActiveWord = word;
@@ -140,25 +137,27 @@ class Turn {
       };
     });
     if(removeIndex !== undefined){
-      this.tempWords.splice(removeIndex, 1);
-      this.tempWords.forEach(word => {
+      tempWords.splice(removeIndex, 1);
+      tempWords.forEach(word => {
         this.secondaryActiveWords.push(word);
       });
-      this.tempWords = [];
       console.log(this.secondaryActiveWords);
     }
   };
 
-  checkPrimaryActiveWordContainsTemp(){
+  checkPrimaryActiveWordContainsTemp(tempWords){
     let removalIndex;
-    this.tempWords.forEach((word, index) => {
+    tempWords.forEach((word, index) => {
       if(word.direction.x === this.primaryActiveWord.direction.x && word.direction.y === this.primaryActiveWord.direction.y){
         removalIndex = index;
       }
     });
     if(removalIndex !== undefined){
-      this.tempWords.splice(removalIndex, 1);
+      tempWords.splice(removalIndex, 1);
     }
+    tempWords.forEach(word => {
+      this.secondaryActiveWords.push(word);
+    });
   }
 
   putTileOnBoard(tile, coord){
@@ -177,40 +176,47 @@ class Turn {
   };
 
   createTempWords(tile, coord){
+    const tempWords = [];
     const adjacentTiles = this.game.board.getAdjacentTiles(coord);
     adjacentTiles.forEach((adjacentTile) => {
       const tempWord = this.createActiveWord(tile, coord, adjacentTile.tile, adjacentTile.coord);
-      this.tempWords.push(tempWord);
-      console.log(this.secondaryActiveWords);
+      tempWords.push(tempWord);
     });
+    return tempWords;
   };
 
   createActiveWord(firstTile, firstCoord, secondTile, secondCoord) {
     const firstPlacedTile = {tile: firstTile, coord: firstCoord};
     if(secondTile !== null && secondCoord !== null){
       const secondPlacedTile = {tile: secondTile, coord: secondCoord};
-      const activeWord = new ActiveWord(firstPlacedTile, secondPlacedTile);
+      let activeWord = new ActiveWord(firstPlacedTile, secondPlacedTile);
       if(activeWord.direction && activeWord.tiles){
-        const direction = otherDirection(Object.keys(activeWord.direction)[0]);
-        let beginningCoord = activeWord.tiles[0].coord;
-        let endCoord = activeWord.tiles[activeWord.tiles.length-1].coord;
-
-        let adjacentTile = this.game.board.getTileBefore(direction, beginningCoord);
-        while (adjacentTile !== null) {
-          activeWord.addTile(adjacentTile);
-          beginningCoord = adjacentTile.coord;
-          adjacentTile = this.game.board.getTileBefore(direction, beginningCoord);
-        }
-        adjacentTile = this.game.board.getTileAfter(direction, endCoord);
-        while (adjacentTile !== null) {
-          activeWord.addTile(adjacentTile);
-          endCoord = adjacentTile.coord;
-          adjacentTile = this.game.board.getTileBefore(direction, endCoord);
-        }
-        return activeWord;
+        console.log(activeWord);
+        return activeWord = this.crawlExistingWords(activeWord);
+        console.log(activeWord);
       }
     }
     return null;
+  }
+
+  crawlExistingWords(word){
+    const direction = otherDirection(Object.keys(word.direction)[0]);
+    let beginningCoord = word.tiles[0].coord;
+    let endCoord = word.tiles[word.tiles.length-1].coord;
+
+    let adjacentTile = this.game.board.getTileBefore(direction, beginningCoord);
+    while (adjacentTile !== null) {
+      word.addTile(adjacentTile);
+      beginningCoord = adjacentTile.coord;
+      adjacentTile = this.game.board.getTileBefore(direction, beginningCoord);
+    }
+    adjacentTile = this.game.board.getTileAfter(direction, endCoord);
+    while (adjacentTile !== null) {
+      word.addTile(adjacentTile);
+      endCoord = adjacentTile.coord;
+      adjacentTile = this.game.board.getTileBefore(direction, endCoord);
+    }
+    return word;
   }
 
   gameReady() {
