@@ -58,7 +58,7 @@ const createRouter = function (collection) {
   // UPDATE
   router.put('/:id', (req, res) => {
     const id = req.params.id;
-    const udpatedData = req.body;
+    const updatedData = req.body;
     delete updatedData._id;
     collection.updateOne(
       { _id: ObjectID(id) },
