@@ -183,7 +183,9 @@ tr#score-row td, th {
 }
 
 div#score-wrapper {
-  display: inline;
+  display: flex;
+  flex-direction: row;
+  border: 1px solid white;
 }
 
 div#lead-view, div#bag, table {
