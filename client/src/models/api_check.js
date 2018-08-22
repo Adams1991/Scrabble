@@ -6,7 +6,7 @@ class ApiCheck {
   constructor() {
   }
 
-  PubSub.subscribe('ApiCheck: word-to-be-checked', (evt) => {
+  PubSub.subscribe('ApiCheck:word-to-be-checked', (evt) => {
     const word = evt.details;
     checkAPIforword(word)
   })
@@ -16,14 +16,12 @@ class ApiCheck {
 module.exports = ApiCheck;
 
 function checkAPIforword(word) {
-    let result = false;
     const url = `http://localhost:3000/validate/${word}`
     const request = new Request(url);
     request.get()
       .then((data) => {
-        if(data.results.length === 1){
-          result = true;
-        }
-        PubSub.publish('Submission: validation-results', result)
+        const result = data.results.length > 0;
+        PubSub.publish('Submission:validation-results', result)
+        console.log(result);
       })
 }
