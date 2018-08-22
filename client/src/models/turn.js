@@ -61,13 +61,15 @@ class Turn {
       if (this.tile !== null && this.coord !== null){
         this.putTileOnBoard(this.tile, this.coord);
         this.createSecondaryWords(this.tile, this.coord);
+        console.log(this.primaryActiveWord);
+        console.log(this.secondaryActiveWords);
       };
     };
   };
 
   placeSecondTile(interactedElement, activeDescriptor) {
     if (this.secondTile !== null && this.secondCoord !== null){
-      const tempWords = this.createTempWords(this.secondTile, this.secondCoord);
+      let tempWords = this.createTempWords(this.secondTile, this.secondCoord);
       this.createPrimaryWordFromSecondary();
       if (this.primaryActiveWord === null){
         this.createPrimaryWordFromTemp(tempWords);
@@ -77,12 +79,16 @@ class Turn {
       };
       if (this.primaryActiveWord !== null){
         this.putTileOnBoard(this.secondTile, this.secondCoord);
-        this.checkPrimaryActiveWordContainsTemp(tempWords);
+        tempWords = this.checkPrimaryActiveWordContainsTemp(tempWords);
+        tempWords.forEach(word => {
+          this.secondaryActiveWords.push(word);
+        });
         this.tile = null;
         this.secondTile = null;
         this.coord = null;
         this.gameReady();
         console.log(this.primaryActiveWord);
+        console.log(this.secondaryActiveWords);
       };
       this.secondCoord = null;
     };
@@ -92,13 +98,17 @@ class Turn {
     this[interactedElement.toLowerCase()] = activeDescriptor;
     if(this.tile !== null && this.coord !== null){
       const placedTile = {tile: this.tile, coord: this.coord};
-      const tempWords = this.createTempWords(this.tile, this.coord);
+      let tempWords = this.createTempWords(this.tile, this.coord);
       if (this.primaryActiveWord.addTile(placedTile)){
         this.putTileOnBoard(this.tile, this.coord);
         this.crawlExistingWords(this.primaryActiveWord);
-        this.checkPrimaryActiveWordContainsTemp(tempWords);
+        tempWords = this.checkPrimaryActiveWordContainsTemp(tempWords);
+        tempWords.forEach(word => {
+          this.secondaryActiveWords.push(word);
+        });
         this.tile = null;
         console.log(this.primaryActiveWord);
+        console.log(this.secondaryActiveWords);
       };
       this.coord = null;
     };
@@ -119,7 +129,6 @@ class Turn {
     });
     if(removeIndex !== undefined){
       this.secondaryActiveWords.splice(removeIndex, 1);
-      console.log(this.secondaryActiveWords);
     }
   };
 
@@ -141,7 +150,6 @@ class Turn {
       tempWords.forEach(word => {
         this.secondaryActiveWords.push(word);
       });
-      console.log(this.secondaryActiveWords);
     }
   };
 
@@ -155,9 +163,7 @@ class Turn {
     if(removalIndex !== undefined){
       tempWords.splice(removalIndex, 1);
     }
-    tempWords.forEach(word => {
-      this.secondaryActiveWords.push(word);
-    });
+    return tempWords;
   }
 
   putTileOnBoard(tile, coord){
@@ -171,7 +177,6 @@ class Turn {
     adjacentTiles.forEach((adjacentTile) => {
       const secondaryActiveWord = this.createActiveWord(tile, coord, adjacentTile.tile, adjacentTile.coord);
       this.secondaryActiveWords.push(secondaryActiveWord);
-      console.log(this.secondaryActiveWords);
     });
   };
 
@@ -191,9 +196,7 @@ class Turn {
       const secondPlacedTile = {tile: secondTile, coord: secondCoord};
       let activeWord = new ActiveWord(firstPlacedTile, secondPlacedTile);
       if(activeWord.direction && activeWord.tiles){
-        console.log(activeWord);
         return activeWord = this.crawlExistingWords(activeWord);
-        console.log(activeWord);
       }
     }
     return null;
