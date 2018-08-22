@@ -7,7 +7,7 @@ class Bag {
     this.addNewTiles('B', 3, 2);
     this.addNewTiles('C', 3, 2);
     this.addNewTiles('D', 2, 4);
-    this.addNewTiles('E', 1, 12);
+    this.addNewTiles('E', 1, 14);
     this.addNewTiles('F', 4, 2);
     this.addNewTiles('G', 2, 3);
     this.addNewTiles('H', 4, 2);
@@ -29,7 +29,6 @@ class Bag {
     this.addNewTiles('X', 8, 1);
     this.addNewTiles('Y', 4, 2);
     this.addNewTiles('Z', 10, 1);
-    this.addNewTiles('', 0, 2);
   };
 
   getNumberOfTiles() {

@@ -26,6 +26,11 @@ class Turn {
       PubSub.publish(`PlayerView:display-view`, this.player);
 
 
+      PubSub.subscribe(`Turn:new-rack-button-click`, () => {
+        // all html rack tiles on Board
+        //send through this.game
+      })
+
       PubSub.subscribe(`Turn:index-last-clicked-tile`, (evt) => {
         const rackIndex = evt.detail;
         const activeTile = this.player.getTileInRackByIndex(rackIndex);
