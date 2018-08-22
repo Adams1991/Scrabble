@@ -2,7 +2,7 @@
   height: 2.5rem;
   width: 2.5rem;
   /* border: 1px solid black; */
-  /* background-color: green; */
+  background-color: green;
 }
 
 /* .tileSlot {
@@ -21,26 +21,26 @@ body {
 }
 
 h1 {
- color: green;
+ color: orange;
 }
 
 td {
  height: 2.5rem;
  width: 2.5em;
  min-width: 2.5rem;
- background-color: green;
+ /* background-color: green; */
 }
 
-#s0\:0, #s0\:7, #s0\:14, #s7\:0, #s7\:14, #s14\:0, #s14\:7, #s14\:14 {
+/* #s0\:0, #s0\:7, #s0\:14, #s7\:0, #s7\:14, #s14\:0, #s14\:7, #s14\:14 {
   background-color: red;
-}
+} */
 
 td.triple-word {
  background-color: red;
 }
 
 td.double-word {
- background-color: pink;
+ background-color: salmon;
 }
 
 td.triple-letter {
@@ -179,11 +179,13 @@ tr#score-row td {
 }
 
 tr#score-row td, th {
-  color: gold;
+  color: orange;
 }
 
 div#score-wrapper {
-  display: inline;
+  display: flex;
+  flex-direction: row;
+  border: 1px solid white;
 }
 
 div#lead-view, div#bag, table {
@@ -192,4 +194,8 @@ div#lead-view, div#bag, table {
 
 .on-board, .hide {
   visibility: hidden;
+}
+
+th, p {
+  font-size: 1.2rem;
 }

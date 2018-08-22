@@ -1,6 +1,8 @@
 class Square {
   constructor() {
     this.tile = null;
+    this.letterMultiplier = null;
+    this.wordMultiplier = null;
   };
 
   getTileValue() {
