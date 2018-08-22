@@ -55,8 +55,6 @@ class Turn {
     if (this.primaryActiveWord === null){
       if (this.tile !== null && this.coord !== null) {
         this[`second${interactedElement}`] = activeDescriptor;
-        console.dir(this.secondCoord);
-        console.dir(this.secondTile);
         this.primaryActiveWord = createActiveWord(this.tile, this.coord, this.secondTile, this.secondCoord)
         if (this.primaryActiveWord !== null){
           const tileOnBoard = {tile: this.secondTile, coord: this.secondCoord};
@@ -87,7 +85,6 @@ class Turn {
           this.tile = null;
         };
         this.coord = null;
-        console.dir(this.primaryActiveWord);
       };
     };
   }

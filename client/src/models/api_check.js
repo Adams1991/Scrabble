@@ -8,6 +8,7 @@ class ApiCheck {
 
   PubSub.subscribe('ApiCheck: word-to-be-checked', (evt) => {
     const word = evt.details;
+    console.log(word);
     checkAPIforword(word)
   })
 
