@@ -22,6 +22,5 @@ function checkAPIforword(word) {
       .then((data) => {
         const result = data.results.length > 0;
         PubSub.publish('Submission:validation-results', result)
-        console.log(result);
       })
 }
