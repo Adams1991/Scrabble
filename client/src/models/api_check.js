@@ -32,5 +32,5 @@ module.exports = ApiCheck;
 function checkAPIforword(word) {
     const url = `http://localhost:3000/validate/${word}`
     const request = new Request(url);
-   return request.get()
+   return request.getForAPI();
 }

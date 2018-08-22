@@ -2,9 +2,16 @@ const Request = function (url) {
   this.url = url;
 };
 
-Request.prototype.get = function (headers) {
+Request.prototype.getForAPI = function (headers) {
   return fetch(this.url, {
     headers: headers
+  })
+    .then((response) => response.json());
+};
+
+Request.prototype.get = function (gameID) {
+  return fetch(`${this.url}/${gameID}`, {
+    method: 'GET'
   })
     .then((response) => response.json());
 };

@@ -61,7 +61,7 @@ class Submission {
 
           saveCurrentGame(gameSubmission.game, this.request)
         } else {
-          // getCurrentGame(this.request)
+          getCurrentGame(gameSubmission.game)
         }
       })
 
@@ -91,7 +91,6 @@ function saveNewGame(game, request) {
 };
 
 
-
 function saveCurrentGame(game, request) {
   request.update(game._id, game)
   .then((savedGame) => {
@@ -102,12 +101,12 @@ function saveCurrentGame(game, request) {
   });
 }
 
-// function getCurrentGame(request) {
-//   request.get()
-//   .then((savedGame) => {
-//     PubSub.publish(`TransitionView:current-game`, savedGame);
-//   })
-//   .catch((err) => {
-//     console.error(err);
-//   });
-// }
+function getCurrentGame(game) {
+  // request.get(gameID)
+  // .then((savedGame) => {
+    PubSub.publish(`TransitionView:current-game`, game);
+  // })
+  // .catch((err) => {
+  //   console.error(err);
+  // });
+}
