@@ -54,35 +54,9 @@ class Turn {
 
   };
 
-<<<<<<< HEAD
-  manipulatePrimaryWord(interactedElement, activeDescriptor){
-    if (this.primaryActiveWord === null){
-      if (this.tile !== null && this.coord !== null) {
-        this[`second${interactedElement}`] = activeDescriptor;
-        this.primaryActiveWord = createActiveWord(this.tile, this.coord, this.secondTile, this.secondCoord)
-        if (this.primaryActiveWord !== null){
-          const tileOnBoard = {tile: this.secondTile, coord: this.secondCoord};
-          PubSub.publish('BoardView:tile-on-board', tileOnBoard);
-          PubSub.publish('RackView:tile-on-board', null)
-
-          this.tile = null;
-          this.secondTile = null;
-          this.coord = null;
-        }
-        this.secondCoord = null;
-      }else {
-        this[interactedElement.toLowerCase()] = activeDescriptor;
-        if (this.tile !== null && this.coord !== null){
-          const tileOnBoard = {tile: this.tile, coord: this.coord}
-          PubSub.publish('BoardView:tile-on-board', tileOnBoard);
-          PubSub.publish('RackView:tile-on-board', null)
-        };
-      }
-=======
   phaseOneA(interactedElement, activeDescriptor) {
     if (this.tile !== null && this.coord !== null) {
       this[`second${interactedElement}`] = activeDescriptor;
->>>>>>> develop
     }else {
       this[interactedElement.toLowerCase()] = activeDescriptor;
       if (this.tile !== null && this.coord !== null){
@@ -109,8 +83,6 @@ class Turn {
         this.tile = null;
         this.secondTile = null;
         this.coord = null;
-<<<<<<< HEAD
-=======
         this.gameReady();
         console.log(this.primaryActiveWord);
       }
@@ -127,7 +99,6 @@ class Turn {
         this.createSecondaryWords(this.tile, this.coord);
         this.tile = null;
         console.log(this.primaryActiveWord);
->>>>>>> develop
       };
       this.coord = null;
     };

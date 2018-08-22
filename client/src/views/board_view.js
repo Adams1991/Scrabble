@@ -15,6 +15,7 @@ class BoardView {
         y: parseInt(squareCoordsArray[1], 10)
       };
       PubSub.publish(`Turn:coord-of-last-square-clicked`, squareCoords);
+      console.log(squareCoords);
     });
 
     PubSub.subscribe('BoardView:update-board', (evt) => {
