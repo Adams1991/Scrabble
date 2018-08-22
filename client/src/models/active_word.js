@@ -49,6 +49,14 @@ class ActiveWord {
     return completeWordScore;
   }
 
+  containsTile(tilePlaced){
+    for(let tile of this.tiles){
+      if(tilePlaced.coord.x === tile.coord.x && tilePlaced.coord.y === tile.coord.y && tilePlaced.tile.letter === tile.tile.letter){
+        return true;
+      }
+    };
+    return false;
+  };
 
 }
 

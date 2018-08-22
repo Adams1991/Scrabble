@@ -28,7 +28,6 @@ class ScoreView {
 
       const currentLead = game.determineLead();
       const lead = this.container.childNodes[1].childNodes[1];
-      console.dir(this.container.childNodes);
       lead.textContent = currentLead;
 
       const remainingTiles = game.getNumberOfTilesInBag();
