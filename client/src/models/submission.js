@@ -18,51 +18,60 @@ class Submission {
     PubSub.subscribe(`Submission:game-submitted`, (evt) => {
       const gameSubmission = evt.detail;
       const activeWords = gameSubmission.activeWords;
-      const activeWordResults = [];
+
 
       PubSub.publish('ApiCheck:word-to-be-checked', activeWords)
 
       PubSub.subscribe('Submission:validation-results', (evt) => {
         const result = evt.detail;
-        console.log(result);
+          // if statement for skipping turn if incorrect word put down.
+        if(result){
+          //Add tiles to board model
+          const activeTiles = document.querySelectorAll('div.active-tile');
+          activeTiles.forEach(activeTile => {
+            const coordArray = activeTile.parentNode.id.split(`:`);
+            const tile = new Tile(activeTile.textContent, activeTile.value);
+            const coord = {
+              x: parseInt(coordArray[0], 10),
+              y: parseInt(coordArray[1], 10)
+            };
+            gameSubmission.game.board.addTileByCoord(tile, coord);
+          });
+
+          //update rack
+          const htmlRack = document.querySelector(`div#rack-container`);
+          let tilesNeeded = 0;
+          htmlRack.childNodes.forEach((node, index) => {
+            if(node.classList.contains(`on-board`)){
+              gameSubmission.game.players[0].rack.removeTileByIndex(index);
+              tilesNeeded += 1;
+            }
+          });
+          gameSubmission.game.players[0].getTilesFromBag(tilesNeeded, gameSubmission.game.bag);
+
+          //update score
+          const score = gameSubmission.activeWords.reduce((score, word) => {
+            return score + word.getWordScore();
+          }, 0);
+          gameSubmission.game.players[0].score += score;
+
+          //index player
+          const lastTurnPlayer = gameSubmission.game.players.shift()
+          gameSubmission.game.players.push(lastTurnPlayer);
+
+          saveCurrentGame(gameSubmission.game, this.request)
+        } else {
+          // getCurrentGame(this.request)
+        }
       })
 
 
 
-      //Add tiles to board model
-      const activeTiles = document.querySelectorAll('div.active-tile');
-      activeTiles.forEach(activeTile => {
-        const coordArray = activeTile.parentNode.id.split(`:`);
-        const tile = new Tile(activeTile.textContent, activeTile.value);
-        const coord = {
-          x: parseInt(coordArray[0], 10),
-          y: parseInt(coordArray[1], 10)
-        };
-        gameSubmission.game.board.addTileByCoord(tile, coord);
-      });
 
-      //update rack
-      const htmlRack = document.querySelector(`div#rack-container`);
-      let tilesNeeded = 0;
-      htmlRack.childNodes.forEach((node, index) => {
-        if(node.classList.contains(`on-board`)){
-          gameSubmission.game.players[0].rack.removeTileByIndex(index);
-          tilesNeeded += 1;
-        }
-      });
-      gameSubmission.game.players[0].getTilesFromBag(tilesNeeded, gameSubmission.game.bag);
 
-      //update score
-      const score = gameSubmission.activeWords.reduce((score, word) => {
-        return score + word.getWordScore();
-      }, 0);
-      gameSubmission.game.players[0].score += score;
 
-      //index player
-      const lastTurnPlayer = gameSubmission.game.players.shift()
-      gameSubmission.game.players.push(lastTurnPlayer);
 
-      saveCurrentGame(gameSubmission.game, this.request)
+
     });
 
   };
@@ -92,3 +101,13 @@ function saveCurrentGame(game, request) {
     console.error(err);
   });
 }
+
+// function getCurrentGame(request) {
+//   request.get()
+//   .then((savedGame) => {
+//     PubSub.publish(`TransitionView:current-game`, savedGame);
+//   })
+//   .catch((err) => {
+//     console.error(err);
+//   });
+// }
