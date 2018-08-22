@@ -20,14 +20,11 @@ class Submission {
       const activeWords = gameSubmission.activeWords;
       const activeWordResults = [];
 
-      activeWords.forEach((word) => {
-        PubSub.publish('ApiCheck:word-to-be-checked', word.getWord())
-      });
+      PubSub.publish('ApiCheck:word-to-be-checked', activeWords)
 
       PubSub.subscribe('Submission:validation-results', (evt) => {
         const result = evt.detail;
         console.log(result);
-        activeWordResults.push(result);
       })
 
 

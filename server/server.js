@@ -25,17 +25,27 @@ MongoClient.connect('mongodb://localhost:27017')
     const url = 	`https://od-api.oxforddictionaries.com:443/api/v1/entries/en/${req.params.word}`
     const api = new ApiKey();
 
-    fetch(url , {headers: {
-     "Accept": "application/json",
-     "app_id": api.apiID,
-     "app_key": api.apiKey
-      }})
-       .then((res) => res.json())
-       .then((data) => res.json(data))
-       .catch((err) => {
-         console.error(err);
-       });
+    fetch(url , { headers: {
+       "Accept": "application/json",
+       "app_id": api.apiID,
+       "app_key": api.apiKey
+      }
+    })
+      .then(handleErrors)
+      .then((res) => res.json())
+      .then((data) => res.json({ isValid: true }))
+      .catch((err) => {
+        console.error(err);
+        res.json({ isValid: false });
+      });
   });
+
+  function handleErrors(res) {
+    if(res.status === 404){
+      throw Error("No Word Found");
+    }
+    return res;
+  }
 
 app.listen(3000, function() {
   console.log(`Scrabble server running on port ${this.address().port}`);

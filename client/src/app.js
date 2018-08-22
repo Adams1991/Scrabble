@@ -1,6 +1,7 @@
 const FormView = require('./views/form_view.js');
 const NewGameView = require('./views/new_game_view.js');
 const Submission = require('./models/submission.js');
+const ApiCheck = require('./models/api_check.js');
 
 document.addEventListener('DOMContentLoaded', () => {
 
@@ -15,5 +16,8 @@ document.addEventListener('DOMContentLoaded', () => {
 
   const newGameView = new NewGameView(main);
   newGameView.bindEvents();
+
+  const apiCheck = new ApiCheck();
+  apiCheck.bindEvents();
 
 });
