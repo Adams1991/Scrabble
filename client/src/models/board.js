@@ -66,57 +66,77 @@ class Board {
     if(bottomTile !== null){adjacentTiles.push(bottomTile)};
     if(leftTile !== null){adjacentTiles.push(leftTile)};
 
-    if(adjacentTiles.length === 0){return null};
+    // if(adjacentTiles.length === 0){return null};
     return adjacentTiles;
   };
 
-}
+};
 
 module.exports = Board;
 
 function createSquares() {
-  const startRowArray = [];
-  const mirrorLineArray = createMirrorLine();
+  let row0 = [];
+  let row1 = [];
+  let row2 = [];
+  let row3 = [];
+  let row4 = [];
+  let row5 = [];
+  let row6 = [];
+  let row7 = [];
+  let row8 = [];
+  let row9 = [];
+  let row10 = [];
+  let row11 = [];
+  let row12 = [];
+  let row13 = [];
+  let row14 = [];
 
-  for (var i = 0; i < 7; i++) {
-    const startColumnArray = [];
+  addSquaresToRow(row0, ['w3','s','s','l2','s','s','s','w3','s','s','s','l2','s','s','w3']);
+  addSquaresToRow(row1, ['s','w2','s','s','s','l3','s','s','s','l3','s','s','s','w2','s']);
+  addSquaresToRow(row2, ['s','s','w2','s','s','s','l2','s','l2','s','s','s','w2','s','s']);
+  addSquaresToRow(row3, ['l2','s','s','w2','s','s','s','l2','s','s','s','w2','s','s','l2']);
+  addSquaresToRow(row4, ['s','s','s','s','w2','s','s','s','s','s','w2','s','s','s','s']);
+  addSquaresToRow(row5, ['s','w3','s','s','s','w3','s','s','s','w3','s','s','s','w3','s']);
+  addSquaresToRow(row6, ['s','s','l2','s','s','s','l2','s','l2','s','s','s','l2','s','s']);
+  addSquaresToRow(row7, ['w3','s','s','l2','s','s','s','w2','s','s','s','l2','s','s','w3']);
+  addSquaresToRow(row8, ['s','s','l2','s','s','s','l2','s','l2','s','s','s','l2','s','s']);
+  addSquaresToRow(row9, ['s','w3','s','s','s','w3','s','s','s','w3','s','s','s','w3','s']);
+  addSquaresToRow(row10, ['s','s','s','s','w2','s','s','s','s','s','w2','s','s','s','s']);
+  addSquaresToRow(row11, ['l2','s','s','w2','s','s','s','l2','s','s','s','w2','s','s','l2']);
+  addSquaresToRow(row12, ['s','s','w2','s','s','s','l2','s','l2','s','s','s','w2','s','s']);
+  addSquaresToRow(row13, ['s','w2','s','s','s','w3','s','s','s','w3','s','s','s','w2','s']);
+  addSquaresToRow(row14, ['w3','s','s','l2','s','s','s','w3','s','s','s','l2','s','s','w3']);
 
-    for (var j = 0; j < 7; j++) {
-      let square;
-      if (i > j) {
-        // need to change logic for mulitpliers
-        square = Object.assign(new Square, startRowArray[j][i]);
-      }else{
-        // Logic for multipliers here
-        square = new Square();
-      };
-      startColumnArray.push(square);
-    };
+  const rows = [row0, row1, row2, row3, row4, row5, row6, row7, row8, row9, row10, row11, row12, row13, row14];
 
-    // need to change logic for mulitpliers
-    const correctColumnArray = startColumnArray.map(square => Object.assign(new Square, square));
-    startColumnArray.reverse()
-    correctColumnArray.push(Object.assign(new Square, mirrorLineArray[i]));
-    const columnArray = correctColumnArray.concat(startColumnArray);
-
-    startRowArray.push(columnArray);
-  };
-
-  const correctRowArray = startRowArray.map(row => row.map(square => Object.assign(new Square, square)));
-  startRowArray.reverse();
-  correctRowArray.push(mirrorLineArray);
-  const rowArray = correctRowArray.concat(startRowArray);
-
-  return rowArray;
+  return rows;
 };
 
-function createMirrorLine() {
-  const mirrorLineArray = [];
-  for (var i = 0; i < 15; i++) {
-    const square = new Square();
-    mirrorLineArray.push(square);
-  }
-  return mirrorLineArray;
+function addSquare(row) {
+  const square = new Square();
+  row.push(square);
+};
+
+function addLetterMultiplierSquare(row, multiplier) {
+  let square = new Square();
+  square.letterMultiplier = multiplier;
+  row.push(square);
+};
+
+function addWordMultiplierSquare(row, multiplier) {
+  let square = new Square();
+  square.wordMultiplier = multiplier;
+  row.push(square);
+};
+
+function addSquaresToRow(row, squares) {
+  squares.forEach((square) => {
+    if (square === 's') {addSquare(row);}
+    else if (square === 'w3') {addWordMultiplierSquare(row, 3);}
+    else if (square === 'w2') {addWordMultiplierSquare(row, 2);}
+    else if (square === 'l3') {addLetterMultiplierSquare(row, 3);}
+    else if (square === 'l2') {addLetterMultiplierSquare(row, 2);}
+  });
 };
 
 function getAdjacentTileCoord(position, directionKey, coord) {

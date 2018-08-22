@@ -17,25 +17,30 @@ body {
   font-family: sans-serif;
   text-align: center;
   font-weight: bold;
-  color: white;
+  color: green;
 }
 
 h1 {
- color: green;
+ color: orange;
 }
 
 td {
  height: 2.5rem;
  width: 2.5em;
- background-color: gold;
+ min-width: 2.5rem;
+ /* background-color: green; */
 }
+
+/* #s0\:0, #s0\:7, #s0\:14, #s7\:0, #s7\:14, #s14\:0, #s14\:7, #s14\:14 {
+  background-color: red;
+} */
 
 td.triple-word {
  background-color: red;
 }
 
 td.double-word {
- background-color: pink;
+ background-color: salmon;
 }
 
 td.triple-letter {
@@ -56,6 +61,7 @@ div.button-container, div.main {
   display: flex;
   justify-content: center;
   align-items: center;
+  flex-wrap: wrap;
 }
 
 div.board {
@@ -76,6 +82,7 @@ section.rack {
 
 table {
   display: inline;
+  margin: 0 auto;
 }
 
 td.score, td.swap-pass {
@@ -111,6 +118,7 @@ button#new-game {
 
 .tile, .tileSlot {
   background-color: orange;
+  color: black;
   height: 2.3rem;
   width: 2.3rem;
   text-align: center;
@@ -158,6 +166,36 @@ ol {
   margin: 0;
 }
 
+div#player-score-wrapper, div#score-wrapper, div#board-wrapper {
+  display: flex;
+  flex-direction: column;
+  margin: 1rem;
+  vertical-align: top;
+}
+
+tr#score-row td {
+  background-color: black;
+  font-size: 3rem;
+}
+
+tr#score-row td, th {
+  color: orange;
+}
+
+div#score-wrapper {
+  display: flex;
+  flex-direction: row;
+  border: 1px solid white;
+}
+
+div#lead-view, div#bag, table {
+  margin: 1rem;
+}
+
 .on-board, .hide {
   visibility: hidden;
+}
+
+th, p {
+  font-size: 1.2rem;
 }

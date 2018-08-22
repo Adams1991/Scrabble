@@ -59,6 +59,11 @@ class Submission {
         return score + word.getWordScore();
       }, 0);
       gameSubmission.game.players[0].score += score;
+
+      //index player
+      const lastTurnPlayer = gameSubmission.game.players.shift()
+      gameSubmission.game.players.push(lastTurnPlayer);
+
       saveCurrentGame(gameSubmission.game, this.request)
     });
 
